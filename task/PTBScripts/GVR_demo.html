@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC 
+    "-//W3C//DTD XHTML 1.0 Transitional//EN"          
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Demographic Information</title>
+<link rel="stylesheet" type="text/css" href="default.css" />
+
+<style type="text/css">
+</style>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+
+<script type="text/javascript">
+
+	var StudyDate = new Date();
+
+	function assignDate() {		
+		var Year = StudyDate.getFullYear();
+		var Month = StudyDate.getMonth() + 1;
+		var Day = StudyDate.getDate();
+		var Hours = StudyDate.getHours();
+		var AMPM = "AM";
+			if (Hours > 12) {
+				Hours = Hours - 12;
+				AMPM = "PM";
+			}
+		var Mins = StudyDate.getMinutes();
+		
+		document.StudyInfo.date.value = Month + "." + Day + "." + Year;
+		document.StudyInfo.time.value = Hours + ":" + Mins + " " + AMPM;
+	}
+	
+	function collectTiming() {
+		var StudyDateEnd = new Date();
+		var TimeOnPage = (StudyDateEnd - StudyDate)/1000;
+		document.StudyInfo.TimeonPage.value = TimeOnPage;
+	}
+	
+	function SubmitData(){
+		document.StudyInfo.submit();
+	}
+</script>
+
+</head>
+<body onLoad="assignDate()">
+
+<div id="instruction" width = "95%">
+<form action='$root/cgi-bin/$studyid/$NextPage.pl' method='POST' name='StudyInfo'>
+<br>
+$Instructions
+<br><hr><br>
+<!-- Gender -->
+<table width='95%' align='center'><tr><td>
+<table class='q'>
+	<tr>
+		<td width='30%' colspan='3'><div class='question'>Gender:</div></td>
+	</tr>
+	<tr>
+		<td class='questionnaire' width='7%'><input type='radio' name = "1" value="1"></td><td class='questionnaire' width='7%'><input type='radio' name = "1" value="2"></td>
+	</tr>	
+	<tr>
+		<td class='questionnaire' width='7%'>Male</td><td class='questionnaire' width='7%'>Female</td><td width='86%'></td>
+	</tr>
+</table>
+<br>
+<!-- Age -->
+<table class='q'>
+	<tr>
+		<td width='30%' colspan='3'><div class='question'>Age in years:</div></td><td><input type='text' name='2' size='3' maxlength='2'></td>
+	</tr>
+</table>
+<br>
+<!-- Year in school -->
+<table class='q'>
+	<tr>
+		<td width='30%' colspan='3'><div class='question'>Year in school:</div></td>
+	</tr>
+</table>
+<table>
+	<tr class='questionnaire1'><td  width='20%'><label for='q3a'><input type='radio' name = "3" value="1" id='q3a'>&nbsp; Freshman</label></td><td width='80%'></td></tr>	
+	<tr><td class='questionnaire1' width='20%'><label for='q3b'><input type='radio' name = "3" value="2" id='q3b'>&nbsp; Sophomore</label></td><td width='80%'></td></tr>	
+	<tr><td class='questionnaire1' width='20%'><label for='q3c'><input type='radio' name = "3" value="3" id='q3c'>&nbsp; Junior</label></td><td width='80%'></td></tr>
+	<tr><td class='questionnaire1' width='20%'><label for='q3d'><input type='radio' name = "3" value="4" id='q3d'>&nbsp; Senior</label></td><td width='80%'></td></tr>
+	<tr><td class='questionnaire1' width='20%'><label for='q3e'><input type='radio' name = "3" value="5" id='q3e'>&nbsp; Graduate student</label></td><td width='80%'></td></tr>	
+	<tr><td class='questionnaire1' width='20%'><label for='q3f'><input type='radio' name = "3" value="6" id='q3f'>&nbsp; Other</label></td><td width='80%'></td></tr>	
+</table>
+<br>
+<!-- Ethnicity -->
+<table class='q'>
+	<tr>
+		<td width='30%' colspan='3'><div class='question'>Ethnic background (check all that apply):</div></td>
+	</tr>
+</table>
+<table>
+	<tr class='questionnaire1'><td  width='30%'><label for='q4a'><input type='checkbox' name = "4" value="1" id='q4a'>&nbsp; African American/Black</label></td><td width='70%'></td></tr>	
+	<tr><td class='questionnaire1' width='30%'><label for='q4b'><input type='checkbox' name = "4" value="2" id='q4b'>&nbsp; Asian American/Asian</label></td><td width='70%'></td></tr>	
+	<tr><td class='questionnaire1' width='30%'><label for='q4c'><input type='checkbox' name = "4" value="3" id='q4c'>&nbsp; Caucasian/Non-hispanic White</label></td><td width='70%'></td></tr>
+	<tr><td class='questionnaire1' width='30%'><label for='q4d'><input type='checkbox' name = "4" value="4" id='q4d'>&nbsp; Hispanic/Latino</label></td><td width='70%'></td></tr>
+	<tr><td class='questionnaire1' width='30%'><label for='q4e'><input type='checkbox' name = "4" value="5" id='q4e'>&nbsp; Native American</label></td><td width='70%'></td></tr>	
+	<tr><td class='questionnaire1' width='30%'><label for='q4f'><input type='checkbox' name = "4" value="6" id='q4f'>&nbsp; Pacific Islander</label></td><td width='70%'></td></tr>
+	<tr><td class='questionnaire1' width='30%'><label for='q4g'><input type='checkbox' name = "4" value="7" id='q4g'>&nbsp; Southeast Asian/Indian</label></td><td width='70%'></td></tr>
+	<tr><td class='questionnaire1' width='30%'><label for='q4h'><input type='checkbox' name = "4" value="8" id='q4h'>&nbsp; Other (please specify)</label></td><td width='70%'></td></tr>
+	<tr><td class='questionnaire1' width='30%'><input type='text' name = "5" size='25'></td><td width='80%'></td></tr>
+</table>
+<br>
+<!-- US Citizen -->
+<table class='q'>
+	<tr>
+		<td width='30%' colspan='3'><div class='question'>Where were you born?</div></td>
+	</tr>
+</table>
+	<table>
+		<tr class='questionnaire1'><td  width='20%'><label for='q6a'><input type='radio' name = "6" value="1" id='q6a'>&nbsp; United States</label></td><td width='80%'></td></tr>
+		<tr class='questionnaire1'><td  width='20%'><label for='q6b'><input type='radio' name = "6" value="2" id='q6b'>&nbsp; Other (please specify)</label></td><td width='80%'></td></tr>
+		<tr class='questionnaire1'><td  width='20%'><input type='text' size='25' name='7'></td><td width='80%'></td></tr>
+	</table>
+<table class='q'>
+	<tr>
+		<td width='50%' colspan='4'><div class='question'>How many years have you lived in the US? &nbsp;&nbsp;</div><input type='text' name = "8" size='3' maxlength='2'></td><td width='60%'></td></tr>
+</table>
+<br>
+<!-- Native English Speaker -->
+<table class='q'>
+	<tr>
+		<td width='30%' colspan='3'><div class='question'>Is English your native language?</div></td>
+	</tr>
+</table>
+	<table>
+		<tr class='questionnaire1'><td  width='20%'><label for='q9a'><input type='radio' name = "9" value="1" id='q9a'>&nbsp; Yes</label></td><td width='80%'></td></tr>
+		<tr class='questionnaire1'><td  width='20%'><label for='q9b'><input type='radio' name = "9" value="2" id='q9b'>&nbsp; No</label></td><td width='80%'></td></tr>
+		<tr class='question'><td  width='20%' colspan='2'>If no: How many years have you been speaking English? &nbsp;&nbsp;<input type='text' size='3' name='10' maxlength='2'></td><td width='80%'></td></tr>
+	</table>
+</table>
+
+<input type='hidden' name='studyid' value='$studyid'>
+<input type='hidden' name='subjectid' value='$subjectid'>
+<input type='hidden' name='QName' value='$QName'>
+<input type='hidden' name='NumItems' value='$NumItems'> \n
+<input type='hidden' name='date' value=''>
+<input type='hidden' name='time' value=''>
+<input type='hidden' name='TimeonPage' value=''>
+<div class='centered1'><input type='button' value='Next-->' onClick='collectTiming(); SubmitData()'></div>
+
+</form>
+<p class="centered"><br><br>&copy; Stanford University Media Communication Project 2008</p>
+</td></tr></table>
+</div>
+</body></html>
