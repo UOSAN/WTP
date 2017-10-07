@@ -27,7 +27,7 @@ This script runs the food auction. You'll need to update the `selectfood.m` file
 - Session type (MRI or behavioral)
 
 ## Output
-Files are save to the SubjectData directory.
+Files are saved to the SubjectData directory.
 
 **PTBParams structure** stores psychtoolbox parameters
 
@@ -37,7 +37,7 @@ Files are save to the SubjectData directory.
 - `ssnid` = Session ID (0 = practice)
 - `time` = Date and time log
 - `StartTime` = Start time that all events are referenced from
-- `Jitter` = cell array with fixation jitters for each trial
+- `Jitter` = Cell array with fixation jitters for each trial
 - `TrialStart` = Start time for each trial
 - `ISI` = Fixation duration (Jitter + specified time)
 - `FoodOn` = Absolute time when food image was flipped
