@@ -1,4 +1,4 @@
-%% Run Food Auction script %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Run Food Auction script %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % This script should be used to define which foods are available for the
 % food selection auction. Just add these foods below and they will be
 % passed to the selectfood function (selectfood.m) which will select a
@@ -15,7 +15,8 @@
 % -Match info
 % -Money left over ($2.00-participant bid)
 %
-% Created by DCos 2015.5.14
+% Author: Dani Cosme
+% Last Modified: 5-14-2015
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Define available foods
@@ -31,7 +32,9 @@ foodpics = {...
 'FruitLeather3.bmp'; ...
 'Kiwi.bmp'; ...
 'Pistachios2.bmp'; ...
-'Yogurt.bmp'};
+'Yogurt.bmp'; ...
+'FruitLeather.bmp'; ...
+'PotatoChips.bmp'};
 
 %% Run food auction
 selectfood(foodpics);
