@@ -20,7 +20,7 @@ checksubjid = 1;
 while checksubjid == 1
     study = input('Study name:  ', 's');
     subjid = input('Subject number:  ', 's');
-    ssnid = input('Session number:  ', 's');
+    ssnid = input('Session number (0 = practice):  ', 's');
     
     if exist(fullfile(homepath, 'SubjectData', [study subjid], [study,'.',subjid,'.',ssnid,'.mat']),'file') == 2
         cont = input('WARNING: Datafile already exists!  Overwrite? (y/n)  ','s');
