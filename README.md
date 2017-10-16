@@ -1,8 +1,6 @@
 ## Willingness To Pay (WTP) task
 
-# TESTING WHAT HAPPENS ON THIS BRANCH
-
-Code and stimuli for the Willingness To Pay task used in the CHIVES study. 
+Code and stimuli for the Willingness To Pay task used in the Duke study. 
 
 Originally adapted from Hutcherson et al. (2012).
 
