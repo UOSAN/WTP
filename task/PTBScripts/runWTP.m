@@ -20,7 +20,7 @@ PTBParams = InitPTB(homepath);
 
 %% Preload Stimulus Pictures 
 % Load food bitmaps into memory
-bmps = dir(fullfile(homepath, 'foodpics'));
+bmps = dir(fullfile(homepath, 'foodpics', ['run',PTBParams.ssnid]));
 
 for x = 1:length(bmps)
     y(x) = ~isempty(regexp(bmps(x).name,'\w*bmp$','match'));
@@ -31,9 +31,6 @@ bmps = bmps(y);
 for x = 1:length(bmps)
     FoodBmp{x} = imread([homepath 'foodpics/' bmps(x).name],'bmp');
 end
-
-% Randomize food order
-Food = randperm(length(FoodBmp));
     
 %% Load bid key bitmap into memory
 BidKeyPic = imread(fullfile(homepath, 'BidKeys.bmp'),'BMP');
@@ -42,7 +39,7 @@ BidKeyPic = imread(fullfile(homepath, 'BidKeys.bmp'),'BMP');
 KeyLegend = Screen('MakeTexture',PTBParams.win,BidKeyPic);
 
 %% Setup jitter
-Jitter = jitter(2,60,1); 
+Jitter = jitter(2,14,1); %num trials in second position
 
 %% Initialize keys
 inputDevice = PTBParams.keys.deviceNum;
@@ -62,7 +59,7 @@ scantrig;
 logData(PTBParams.datafile,1,StartTime,Jitter);
 
 % Run task
-for trial = 1:60 %num trials
+for trial = 1:14 %num trials
     bidFood
     BidWait = 4;
         if PTBParams.inMRI == 1 %In the scanner use 56789, if outside use 123456
@@ -76,7 +73,6 @@ for trial = 1:60 %num trials
 
     BidDuration = BidOffset-BidOnset;
     logData(PTBParams.datafile,trial,TrialStart,ISI,FoodOn,BidOn,FoodOnset,BidOnset,FoodDuration,BidDuration,FoodPic,FoodNum,Resp,RT);
-
 end
 
 % Wait for 10 seconds and log end time
