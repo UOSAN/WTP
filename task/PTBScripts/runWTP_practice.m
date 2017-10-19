@@ -68,9 +68,9 @@ for trial = 1:3 %num trials
     bidFood;
     BidWait = 4;
     if PTBParams.inMRI == 1
-        [Resp RT] = collectResponse(BidWait,0,'56789');
+        [Resp RT] = collectResponse(BidWait,0,'5678');
     else
-        [Resp RT] = collectResponse(BidWait,0,'12345');
+        [Resp RT] = collectResponse(BidWait,0,'1234');
     end
     logData(PTBParams.datafile,trial,FoodPic,FoodNum,Resp,RT);
 
