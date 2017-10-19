@@ -20,8 +20,7 @@ checksubjid = 1;
 while checksubjid == 1
     study = input('Study name:  ', 's');
     subjid = input('Subject number:  ', 's');
-    ssnid = input('Session number (0 = practice):  ', 's');
-    nruns = input('Number of runs:  ');
+    ssnid = input('Session number:  ', 's');
     
     if exist(fullfile(homepath, 'SubjectData', [study subjid], [study,'.',subjid,'.',ssnid,'.mat']),'file') == 2
         cont = input('WARNING: Datafile already exists!  Overwrite? (y/n)  ','s');
@@ -63,6 +62,7 @@ inMRI = input('MRI session? 0 = no, 1 = yes: ');
 if isempty(inMRI)
     inMRI = 0;
 end
+
 PTBParams.inMRI = inMRI;
 
 %% Initialize PsychToolbox parameters and save in PTBParams struct
@@ -99,13 +99,14 @@ PTBParams.datafile = datafile;
 PTBParams.homepath = homepath;
 PTBParams.subjid = str2double(subjid);
 PTBParams.ssnid = ssnid;
-PTBParams.nruns = nruns;
 PTBParams.keys = initKeys_money;
 PTBParams.inMRI = inMRI;
 
 % Save PTBParams structure
 datafile = fullfile(homepath, 'SubjectData', [study subjid], ['PTBParams.',subjid,'.',ssnid,'.mat']);
 save(datafile,'PTBParams');
+
+% Flip screen
 Screen(w,'TextSize',round(.1*ctr(2)));
 Screen('TextFont',w,'Helvetica');
 Screen('FillRect',w,black);

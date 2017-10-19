@@ -17,7 +17,6 @@ pathtofile = mfilename('fullpath');
 homepath = pathtofile(1:(regexp(pathtofile,'PTBScripts') - 1));
 addpath(fullfile(homepath,'PTBScripts'));
 PTBParams = InitPTB(homepath);
-homepath=PTBParams.homepath;
 
 %% Preload Stimulus Pictures 
 % Load food bitmaps into memory
@@ -32,10 +31,7 @@ bmps = bmps(y);
 for x = 1:length(bmps)
     FoodBmp{x} = imread(fullfile(sprintf('%sfoodpics/run%s/%s', homepath, PTBParams.ssnid, bmps(x).name)),'bmp');
 end
-
-% Randomize food order
-Food = randperm(length(FoodBmp));
-
+    
 %% Load bid key bitmap into memory
 BidKeyPic = imread(fullfile(homepath, 'BidKeys.bmp'),'BMP');
 
@@ -44,7 +40,6 @@ KeyLegend = Screen('MakeTexture',PTBParams.win,BidKeyPic);
 
 %% Setup jitter
 Jitter = jitter(1,length(FoodBmp),1); %num trials in second position
-Jitter(Jitter > 6) = 6; %truncate max to 6 seconds
 
 %% Initialize keys
 inputDevice = PTBParams.keys.deviceNum;
@@ -66,19 +61,18 @@ logData(PTBParams.datafile,1,StartTime,Jitter);
 % Run task
 for trial = 1:length(FoodBmp) %num trials
     bidFood
-    BidWait = 2.50;
-        if PTBParams.inMRI == 1 %In the scanner use 5678, if outside use 1234
-            [Resp, RT] = collectResponse(BidWait,0,'5678');
+    BidWait = 2.5;
+        if PTBParams.inMRI == 1 %In the scanner use 56789, if outside use 123456
+            [Resp, RT] = collectResponse(BidWait,0,'56789');
         else
-            [Resp, RT] = collectResponse(BidWait,0,'1234'); %Changing the first argument changes the time the bid is on the screen
+            [Resp, RT] = collectResponse(BidWait,0,'12345'); %Changing the first argument changes the time the bid is on the screen
         end
     DrawFormattedText(PTBParams.win,'+','center','center',PTBParams.white);
     BidOff = Screen(PTBParams.win,'Flip');
     BidOffset = BidOff-StartTime;
 
     BidDuration = BidOffset-BidOnset;
-    logData(PTBParams.datafile,trial,TrialStart,ISI,FoodOn,BidOn,FoodOnset,...
-            BidOnset,FoodDuration,BidDuration,FoodPic,FoodNum,Resp,RT);
+    logData(PTBParams.datafile,trial,TrialStart,ISI,FoodOn,BidOn,FoodOnset,BidOnset,FoodDuration,BidDuration,FoodPic,FoodNum,Resp,RT);
 end
 
 % Wait for 10 seconds and log end time

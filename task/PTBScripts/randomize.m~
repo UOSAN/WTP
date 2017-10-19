@@ -1,4 +1,4 @@
-%% randomize.m %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Randomize.m %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % Author: Dani Cosme
 %
@@ -33,20 +33,11 @@ bmps = bmps(y);
 % Randomize food order
 foodrand = randperm(length({bmps(:).name}));
 
-% Create directories if they do not exist
-for i = 1:nruns
-    rundir = fullfile(sprintf('%sfoodpics/run%d', homepath, i));
-    if ~exist(rundir)
-        disp(sprintf('Run directory %d did not exist. Creating it now.',i))
-        mkdir(rundir);
-    end
-end
-
-% Remove current images from run directories
+% Create directories if they
+% Remove current images from folders
 for i = 1:nruns
     rundir = dir(fullfile(sprintf('%sfoodpics/run%d', homepath, i)));
-    if numel(rundir) > 2
-        disp(sprintf('Removing files from run directory %d', i))
+    if numel(rundir) > 0
         delete(sprintf('%sfoodpics/run%d/*.bmp', homepath, i));
     end
 end
