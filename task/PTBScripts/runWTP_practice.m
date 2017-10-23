@@ -57,7 +57,7 @@ for insrx = 1
     showInstruction(1,PTBParams,'SlideType','BMP');
 end
 
-Jitter = jitter(2,3,1); 
+Jitter = jitter(1,3,1); 
 bidTest
 
 showInstruction(6,PTBParams,'SlideType','BMP')
@@ -66,7 +66,7 @@ Food = [2 3 1];
 % Run task
 for trial = 1:3 %num trials
     bidFood;
-    BidWait = 4;
+    BidWait = 2.5;
     if PTBParams.inMRI == 1
         [Resp RT] = collectResponse(BidWait,0,'5678');
     else
