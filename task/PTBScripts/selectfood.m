@@ -75,59 +75,59 @@ end
 
     
 %% Initialize Screen
-AssertOpenGL;
-ListenChar(2); % don't print keypresses to screen
-%   Screen('Preference', 'SkipSyncTests', 1); % use if VBL fails
-Screen('Preference', 'VisualDebugLevel',3);
-
-HideCursor;
-screenNum = 0;
-
-if str2double(subjid) > 900
-    %[w, rect] = Screen('OpenWindow',screenNum);
-    [w, rect] = Screen('OpenWindow',screenNum, [], [0 0 800 600]); %partial screen mode, for debugging
-else
-    [w, rect] = Screen('OpenWindow',screenNum);
-end
-
-ctr = [rect(3)/2, rect(4)/2]; 
-white=WhiteIndex(w);
-black=BlackIndex(w);
-gray = (WhiteIndex(w) + BlackIndex(w))/2;
-ifi = Screen('GetFlipInterval', w);
-
-% setup screen
-Screen(w,'TextSize',round(.1*ctr(2)));
-Screen('TextFont',w,'Helvetica');
-Screen('FillRect',w,black);
-    
-%% Draw text
-DrawFormattedText(PTBParams.win,['Trial selected: ' trial],'center',PTBParams.ctr(2)-.8*PTBParams.ctr(2),PTBParams.white);
-Screen(w,'Flip',[],1);
-Screen(w,'Flip');
-DrawFormattedText(PTBParams.win,'Food on trial ','center',PTBParams.ctr(2)-.8*PTBParams.ctr(2),PTBParams.white);
-WaitSecs(1.5);
-Screen(w,'Flip',[],1);
-FoodPic=Screen('MakeTexture',PTBParams.win,food);
-Screen('DrawTexture',PTBParams.win,FoodPic);
-WaitSecs(1.5);
-Screen(w,'Flip',[],1);
-DrawFormattedText(PTBParams.win,['Random bid selected: ',cur2str(bidRand)],'center',PTBParams.ctr(2)-.6*PTBParams.ctr(2),PTBParams.white);
-WaitSecs(1.5);
-Screen(w,'Flip',[],1);
-DrawFormattedText(PTBParams.win,['Your bid on trial: ',cur2str(bid)],'center',PTBParams.ctr(2)+.8*PTBParams.ctr(2),PTBParams.white);
-WaitSecs(2);
-Screen(w,'Flip');
-DrawFormattedText(PTBParams.win,match,'center',PTBParams.white);
-WaitSecs(2);
-Screen(w,'Flip');
-
-while ~GetChar
-end
-
-%% Housekeeping after the party
- Screen('CloseAll');
- ListenChar(0);
+% AssertOpenGL;
+% ListenChar(2); % don't print keypresses to screen
+% %   Screen('Preference', 'SkipSyncTests', 1); % use if VBL fails
+% Screen('Preference', 'VisualDebugLevel',3);
+% 
+% HideCursor;
+% screenNum = 0;
+% 
+% if str2double(subjid) > 900
+%     %[w, rect] = Screen('OpenWindow',screenNum);
+%     [w, rect] = Screen('OpenWindow',screenNum, [], [0 0 800 600]); %partial screen mode, for debugging
+% else
+%     [w, rect] = Screen('OpenWindow',screenNum);
+% end
+% 
+% ctr = [rect(3)/2, rect(4)/2]; 
+% white=WhiteIndex(w);
+% black=BlackIndex(w);
+% gray = (WhiteIndex(w) + BlackIndex(w))/2;
+% ifi = Screen('GetFlipInterval', w);
+% 
+% % setup screen
+% Screen(w,'TextSize',round(.1*ctr(2)));
+% Screen('TextFont',w,'Helvetica');
+% Screen('FillRect',w,black);
+%     
+% %% Draw text
+% DrawFormattedText(PTBParams.win,['Trial selected: ' trial],'center',PTBParams.ctr(2)-.8*PTBParams.ctr(2),PTBParams.white);
+% Screen(w,'Flip',[],1);
+% Screen(w,'Flip');
+% DrawFormattedText(PTBParams.win,'Food on trial ','center',PTBParams.ctr(2)-.8*PTBParams.ctr(2),PTBParams.white);
+% WaitSecs(1.5);
+% Screen(w,'Flip',[],1);
+% FoodPic=Screen('MakeTexture',PTBParams.win,food);
+% Screen('DrawTexture',PTBParams.win,FoodPic);
+% WaitSecs(1.5);
+% Screen(w,'Flip',[],1);
+% DrawFormattedText(PTBParams.win,['Random bid selected: ',cur2str(bidRand)],'center',PTBParams.ctr(2)-.6*PTBParams.ctr(2),PTBParams.white);
+% WaitSecs(1.5);
+% Screen(w,'Flip',[],1);
+% DrawFormattedText(PTBParams.win,['Your bid on trial: ',cur2str(bid)],'center',PTBParams.ctr(2)+.8*PTBParams.ctr(2),PTBParams.white);
+% WaitSecs(2);
+% Screen(w,'Flip');
+% DrawFormattedText(PTBParams.win,match,'center',PTBParams.white);
+% WaitSecs(2);
+% Screen(w,'Flip');
+% 
+% while ~GetChar
+% end
+% 
+% %% Housekeeping after the party
+%  Screen('CloseAll');
+%  ListenChar(0);
  
 %% Display information in the command window
 disp('---------------------');
