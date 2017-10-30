@@ -1,4 +1,4 @@
-function logData(datafile, trial,varargin)
+function logData(datafile, runNum, trial,varargin)
 %--------------------------------------------------------------------------
 % USAGE: logData(datafile, trial, [recordedVariables],...)
 %
@@ -42,12 +42,12 @@ else
 end
 
 % Save requested variables
-for VAR = 1:(nargin - 2)
-    
+for VAR = 1:(nargin - 3)
     if ~isstruct(varargin{VAR})
         
         % USAGE 1
-        eval(['Data.' inputname(VAR + 2) '{' num2str(trial) '} = varargin{' ...
+        structureName = sprintf('Data.%s.',runNum);
+        eval([structureName inputname(VAR + 3) '{' num2str(trial) '} = varargin{' ...
             num2str(VAR) '};']);
         
     else
