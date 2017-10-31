@@ -25,7 +25,7 @@ Bids = [];
 load(fullfile(homepath, 'SubjectData', [study subjid], [study,'.',subjid,'.',ssnid,'.mat']));
 load(fullfile(homepath, 'SubjectData', [study subjid], ['PTBParams.',subjid,'.',ssnid,'.mat']));
 
-nRuns = length(find(~cellfun(@isempty,regexp(fieldnames(Data),'run*'))));
+nRuns = length(find(~cellfun(@isempty,regexp(fieldnames(Data),'run[1-9]{1}'))));
 for i = 1:nRuns
     runName = sprintf('run%d',i);
     FoodstoSelect = [FoodstoSelect, Data.(char(runName)).FoodPic];
