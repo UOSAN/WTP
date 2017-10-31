@@ -77,7 +77,7 @@ for i = 1:nruns
 end
 
 clear x y
-% Check positions to ensure no images is selected twice
+% Check positions to ensure no image is selected twice
 %sort(horzcat(run1,run2,run3))
 %sort(horzcat(run1_images,run2_images,run3_images))
 
@@ -119,6 +119,6 @@ for i = 1:nruns
   last = last + n;
 end
 
-% Check positions to ensure no images is selected twice
+% Check positions to ensure no image is selected twice
 %sort(horzcat(run1,run2,run3))
 %sort(horzcat(run1_images,run2_images,run3_images))
