@@ -36,6 +36,9 @@ end
 % Randomize food order
 Food = randperm(length(FoodBmp));
 
+% Load health information 
+load(fullfile(homepath,'foodpics','healthInfo.mat'));
+
 %% Load bid key bitmap into memory
 BidKeyPic = imread(fullfile(homepath, 'BidKeys.bmp'),'BMP');
 
@@ -78,7 +81,7 @@ for trial = 1:length(FoodBmp) %num trials
 
     BidDuration = BidOffset-BidOnset;
     logData(PTBParams.datafile,runNum,trial,TrialStart,ISI,FoodOn,BidOn,FoodOnset,...
-            BidOnset,FoodDuration,BidDuration,FoodPic,FoodNum,Resp,RT);
+            BidOnset,FoodDuration,BidDuration,FoodPic,FoodNum,HealthCond,Resp,RT);
 end
 
 % Wait for 10 seconds and log end time

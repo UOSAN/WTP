@@ -37,3 +37,5 @@ FoodNum = Food(trial);
 FoodOnset = FoodOn-StartTime;
 BidOnset = BidOn-StartTime;
 FoodDuration = BidOnset-FoodOnset;
+HealthCond = HealthConds(strcmp(FoodImages, FoodPic));
+
