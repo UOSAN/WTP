@@ -2,8 +2,9 @@
 %
 % Author: Dani Cosme
 %
-% Description: This script randomizes the food images, separates them into
-% runs, and addes the images to the run directories in task/foodpics/run[X] 
+% Description: This script randomizes the food images within each health
+% category, separates them into runs, and addes the images to the run
+% directories in task/foodpics/run[X] 
 % 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
