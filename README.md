@@ -7,7 +7,7 @@ Originally adapted from Hutcherson et al. (2012).
 ## Key scripts
 **`runRandomize.m`** 
 This script randomizes the images within each health category (healthy and unhealthy), splits the images based on the number of runs, and populates the image run folders `foodpics/run1` etc. User inputs include:
-- Run Number = number of runs. The number of images in the healthy and unhealthy food folders must be divisible by this number.
+- Run Number (The number of images in the healthy and unhealthy food folders must be divisible by this number)
 
 **`runWTP.m`**
 This script runs the task. You can specify whether the task will be run in the MRI scanner or behaviorally. User inputs include:
