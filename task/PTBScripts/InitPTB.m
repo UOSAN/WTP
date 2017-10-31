@@ -83,8 +83,8 @@ HideCursor;
 screenNum=0;
 
 % Set screen size and parameters
-%[w, rect] = Screen('OpenWindow',screenNum);
-[w, rect] = Screen('OpenWindow',screenNum, [], [0 0 800 400]); %DCos 2015.06.25, Use for debugging
+[w, rect] = Screen('OpenWindow',screenNum);
+%[w, rect] = Screen('OpenWindow',screenNum, [], [0 0 800 400]); %DCos 2015.06.25, Use for debugging
 
 ctr = [rect(3)/2, rect(4)/2]; 
 white=WhiteIndex(w);
