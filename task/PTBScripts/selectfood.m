@@ -63,12 +63,17 @@ end
 if bid{1} == 'NULL'
     bid = 0;
 else
-    bid = str2num(bid{1});
-    bid = (bid-1)/2;
+    if inMRI == 0
+        bid = str2num(bid{1});
+        bid = (bid-1)/2;
+    else
+        bid = str2num(bid{1});
+        bid = (bid-5)/2;
+    end
 end
 
 %% Pick random bid value
-bidsPossible = [0 .5 1 1.5 2];
+bidsPossible = [0 .5 1 1.5];
 if inMRI == 1
     bidRand = 0; %Rigged auction for after scanner 
 else
