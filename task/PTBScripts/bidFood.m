@@ -10,7 +10,7 @@
 
 %% Run script for each trial
 % Specify food image and fixation presentation lengths
-WaitTime = 2.5; %Specifies how long to wait before bid keys appear
+WaitTime = 4; %Specifies how long to wait before bid keys appear
 ISI = Jitter(trial)+3; %Added ISI so that it can be logged, DEC 15.4.27
 
 % Display fixation 
