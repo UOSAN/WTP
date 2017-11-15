@@ -33,7 +33,7 @@ end
 bmps_healthy = bmps_healthy(y);
 
 % Check if number of stimuli set is divisible by the number of runs
-if mod(length(y),nruns) ~= 0
+if mod(length(bmps_healthy),nruns) ~= 0
     error('The number of healthy images is not divisible by the number of runs. Check the inputs.')
 end
 
@@ -99,7 +99,7 @@ end
 bmps_unhealthy = bmps_unhealthy(y);
 
 % Check if number of stimuli set is divisible by the number of runs
-if mod(length(y),nruns) ~= 0
+if mod(length(bmps_unhealthy),nruns) ~= 0
     error('The number of unhealthy images is not divisible by the number of runs. Check the inputs.')
 end
 
