@@ -13,7 +13,7 @@ clear all;
 pathtofile = mfilename('fullpath');
 homepath = pathtofile(1:(regexp(pathtofile,'PTBScripts') - 1));
 addpath(fullfile(homepath,'PTBScripts'));
-PTBParams = InitPTB(homepath);
+[PTBParams, runNum] = InitPTB(homepath);
 
 %% Preload Stimulus Pictures 
 % Load food bitmaps into memory
@@ -30,6 +30,9 @@ for x = 1:length(bmps)
 end
 FoodBmp = PracFoodBmp;
     
+% Load health information 
+load(fullfile(homepath,'foodpics','healthInfo.mat'));
+
 %% Load bid key bitmap into memory
 BidKeyPic = imread(fullfile(homepath, 'BidKeys.bmp'),'BMP');
 
@@ -47,6 +50,7 @@ else
 end
 Screen(PTBParams.win,'Flip');
 
+%% Run task and log data
 % Wait for the trigger before continuing
 % Wait for a 'spacebar' to start the behavioral version, and an ' for the scanner version
 scantrig; 
@@ -57,7 +61,7 @@ for insrx = 1
     showInstruction(1,PTBParams,'SlideType','BMP');
 end
 
-Jitter = jitter(2,3,1); 
+Jitter = jitter(1,3,1); 
 bidTest
 
 showInstruction(6,PTBParams,'SlideType','BMP')
@@ -66,13 +70,13 @@ Food = [2 3 1];
 % Run task
 for trial = 1:3 %num trials
     bidFood;
-    BidWait = 4;
+    BidWait = 2.5;
     if PTBParams.inMRI == 1
-        [Resp RT] = collectResponse(BidWait,0,'56789');
+        [Resp RT] = collectResponse(BidWait,0,'5678');
     else
-        [Resp RT] = collectResponse(BidWait,0,'12345');
+        [Resp RT] = collectResponse(BidWait,0,'1234');
     end
-    logData(PTBParams.datafile,trial,FoodPic,FoodNum,Resp,RT);
+    logData(PTBParams.datafile,runNum,trial,FoodPic,FoodNum,Resp,RT);
 
 end
 

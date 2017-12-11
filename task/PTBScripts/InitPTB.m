@@ -1,4 +1,4 @@
-function PTBParams = InitPTB(homepath)
+function [PTBParams, runNum] = InitPTB(homepath)
 % function [subjid ssnid datafile PTBParams] = InitPTB(homepath)
 % 
 % Function for initializing parameters at the beginning of a session
@@ -20,9 +20,10 @@ checksubjid = 1;
 while checksubjid == 1
     study = input('Study name:  ', 's');
     subjid = input('Subject number:  ', 's');
-    ssnid = input('Session number (0 = practice):  ', 's');
+    ssnid = input('Session number:  ', 's');
+    runid = input('Run number:  ');
     
-    if exist(fullfile(homepath, 'SubjectData', [study subjid], [study,'.',subjid,'.',ssnid,'.mat']),'file') == 2
+    if runid == 1 && (exist(fullfile(homepath, 'SubjectData', [study subjid], [study,'.',subjid,'.',ssnid,'.mat']),'file') == 2)
         cont = input('WARNING: Datafile already exists!  Overwrite? (y/n)  ','s');
         if cont == 'y'
             checksubjid = 0;
@@ -48,11 +49,17 @@ if ~exist([homepath 'SubjectData/' study subjid],'dir')
     mkdir([homepath 'SubjectData/' study subjid]);
 end
 
+% Specify run number to use in the data structure
+runNum = sprintf('run%d',runid);
+datafile = fullfile(homepath, 'SubjectData', [study subjid], [study,'.',subjid,'.',ssnid,'.mat']);
+
+if exist(datafile,'file')
+    load(datafile);
+end
 Data.subjid = subjid;
 Data.ssnid = ssnid;
-Data.time = datestr(now);
+Data.(char(runNum)).time = datestr(now);
 
-datafile = fullfile(homepath, 'SubjectData', [study subjid], [study,'.',subjid,'.',ssnid,'.mat']);
 save(datafile,'Data');
 
 %% Initialize parameters for fMRI
@@ -62,7 +69,6 @@ inMRI = input('MRI session? 0 = no, 1 = yes: ');
 if isempty(inMRI)
     inMRI = 0;
 end
-PTBParams.inMRI = inMRI;
 
 %% Initialize PsychToolbox parameters and save in PTBParams struct
 AssertOpenGL;
@@ -100,10 +106,13 @@ PTBParams.subjid = str2double(subjid);
 PTBParams.ssnid = ssnid;
 PTBParams.keys = initKeys_money;
 PTBParams.inMRI = inMRI;
+PTBParams.(char(runNum)).runid = runid;
 
 % Save PTBParams structure
 datafile = fullfile(homepath, 'SubjectData', [study subjid], ['PTBParams.',subjid,'.',ssnid,'.mat']);
 save(datafile,'PTBParams');
+
+% Flip screen
 Screen(w,'TextSize',round(.1*ctr(2)));
 Screen('TextFont',w,'Helvetica');
 Screen('FillRect',w,black);
