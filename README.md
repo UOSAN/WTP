@@ -1,6 +1,6 @@
 ## Willingness To Pay (WTP) task
 
-Code and stimuli for the Willingness To Pay task used in the Duke study. 
+Code and stimuli for the Willingness To Pay task used in the Devaluation study. 
 
 Originally adapted from Hutcherson et al. (2012).
 
@@ -36,8 +36,8 @@ This script runs the food auction. You'll need to update the `selectfood.m` file
 Files are saved to the SubjectData directory. Files are nested in the following manner:
 ```
 |-- SubjectData
-    |-- duke999                   [StudyName SubjectID] 
-        |-- duke.999.1.mat        [StudyName . SubjectID . Session.mat]
+    |-- DEV999                   [StudyName SubjectID] 
+        |-- DEV.999.1.mat        [StudyName . SubjectID . Session.mat]
         |-- PTBParams.999.1.mat   [PTBParams . SubjectID . Session.mat]
 ```
 **PTBParams structure** stores psychtoolbox parameters
