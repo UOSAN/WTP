@@ -1,4 +1,4 @@
-function [PTBParams, runNum] = InitPTB(homepath)
+function [PTBParams, runNum, study] = InitPTB(homepath)
 % function [subjid ssnid datafile PTBParams] = InitPTB(homepath)
 % 
 % Function for initializing parameters at the beginning of a session
@@ -76,7 +76,7 @@ ListenChar(2); % don't print keypresses to screen
 Screen('Preference', 'SkipSyncTests', 1); % use if VBL fails; use this setting on the laptop
 %Screen('Preference', 'VisualDebugLevel',3);
 
-HideCursor;
+HideCursor; %comment out for testing only
 
 % Set screen number
 %screenNum=max(Screen('Screens'));
