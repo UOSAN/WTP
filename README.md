@@ -5,15 +5,23 @@ Code and stimuli for the Willingness To Pay task used in the Devaluation study.
 Originally adapted from Hutcherson et al. (2012).
 
 ## Key scripts
-**`runRandomize.m`** 
-This script randomizes the images within each health category (healthy and unhealthy), splits the images based on the number of runs, and populates the image run folders `foodpics/run1` etc. User inputs include:
-- Run Number (The number of images in the healthy and unhealthy food folders must be divisible by this number)
+**`runJitter.m`** 
+This script creates a vector with jitter times based on the number of trials per run. It is saved as `WTP/task/input/jitter.m`. The same jitter vector is used in each run. This script only needs to be run once (or until a desired vector is achieved) per study. User inputs include:
+- Number of trials in each run
+
+**`runImages.m`** 
+This script selects images based on subject ratings, randomizes the images within each health (healthy and unhealthy) and liking (liked and disliked) category, splits the images based on the number of runs, and populates the image run folders `foodpics/run1` etc. User inputs include:
+- Study name
+- Subject ID
+- Number of runs 
+- Total number of trials per condition (This number must be divisible by the number of runs)
+- Image ratings saved as a .csv file with the following format: `WTP/task/input/[StudyName SubjectID]_ratings.csv` e.g. `DEV999_ratings.csv`
 
 **`runWTP.m`**
 This script runs the task. You can specify whether the task will be run in the MRI scanner or behaviorally. User inputs include:
 - Study name
 - Subject ID
-- Session Number (0 = practice)
+- Session Number (0 = practice; 1, unless a longitudinal study)
 - Session type (MRI or behavioral)
 
 **`runWTP_practice.m`** 
@@ -60,7 +68,9 @@ Files are saved to the SubjectData directory. Files are nested in the following 
 - `BidDuration` = Duration of bid 
 - `FoodPic` = Food image file name
 - `FoodNum` = Food number from original list
+- `HealthCond` = Health condition (healthy or unhealthy)
+- `LikingCond` = Liking condition (liked or disliked)
+- `LikingRating` = Liking rating (collected prior to running the task)
 - `Resp` = Bid response
 - `RT` = Bid reaction time
 - `EndTime` = End time
-- `HealthCond` = Health condition (healthy or unhealthy)
