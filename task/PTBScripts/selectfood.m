@@ -43,7 +43,8 @@ foodchosen = 0;
 
 while foodchosen == 0 
     
-    x = ismember(foodpics, FoodstoSelect(choosefood(iter)));
+    selected = FoodstoSelect(choosefood(iter));
+    x = ismember(foodpics, selected{1});
 
     if sum(x) == 0
         %disp('No food matches found within subset. Continuing to search.')
@@ -55,7 +56,7 @@ while foodchosen == 0
         foodchosen = 1;
         bid = Bids(choosefood(iter));
         trial = num2str(choosefood(iter));
-        foodName = FoodstoSelect(choosefood(iter));
+        foodName = selected{1};
     end
 end
 
@@ -151,4 +152,4 @@ disp(['Food selected: ',char(foodName)]);
 disp(['Participant bid: ',cur2str(bid)]);
 disp(['Random bid: ',cur2str(bidRand)]);
 disp(match);
-%disp(['Money left: ',cur2str(2-bid)]);
+disp(['Money left: ',cur2str(2-bid)]);
