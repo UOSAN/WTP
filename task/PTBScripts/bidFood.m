@@ -32,10 +32,14 @@ BidOn = Screen(PTBParams.win,'Flip',FoodOn+WaitTime);
 Screen('Close',FoodScreen);
 
 % Log trial info
-FoodPic = bmps(Food(trial)).name;
+FoodPic = bmps(Food(trial));
 FoodNum = Food(trial);
 FoodOnset = FoodOn-StartTime;
 BidOnset = BidOn-StartTime;
 FoodDuration = BidOnset-FoodOnset;
-HealthCond = HealthConds(strcmp(FoodImages, FoodPic));
+Cond = TrialOrder(trial);
+CondSplit = strsplit(char(TrialOrder(trial)), '_');
+HealthCond = CondSplit{1};
+LikingCond = CondSplit{2};
+LikingRating = ratings(find(strcmp(FoodPic, images)));
 
