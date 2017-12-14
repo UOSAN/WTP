@@ -16,28 +16,44 @@ clear all;
 pathtofile = mfilename('fullpath');
 homepath = pathtofile(1:(regexp(pathtofile,'PTBScripts') - 1));
 addpath(fullfile(homepath,'PTBScripts'));
-[PTBParams, runNum] = InitPTB(homepath);
+[PTBParams, runNum, study] = InitPTB(homepath);
 homepath=PTBParams.homepath;
+
+%% Load trial and subject condition info
+% Load trial condition order info
+TrialOrder = {'healthy_liked', 'healthy_disliked', 'unhealthy_liked', ...
+    'unhealthy_disliked', 'healthy_liked', 'healthy_disliked', ...
+    'unhealthy_liked', 'unhealthy_disliked','healthy_liked', 'healthy_disliked', 'unhealthy_liked', ...
+    'unhealthy_disliked', 'healthy_liked', 'healthy_disliked', ...
+    'unhealthy_liked', 'unhealthy_disliked'};
+
+% Load subject condition info
+subinput = sprintf('%sinput/%s%d_condinfo.mat',homepath,study,PTBParams.subjid);
+load(subinput)
+
+% Define image order based on trial and condition info
+bmps = cell(1,length(TrialOrder));
+conds = unique(TrialOrder);
+for i = 1:length(conds)
+    cond = conds{i};
+    idxs = find(strcmp(TrialOrder,cond));
+    a = 1;
+    for j = 1:length(idxs)
+        idx = idxs(j);
+        bmps{idx} = eval(sprintf('run%d_%s{a,1}',PTBParams.(char(runNum)).runid,cond));
+        a = a+1;
+    end
+end
 
 %% Preload Stimulus Pictures 
 % Load food bitmaps into memory
-bmps = dir(fullfile(sprintf('%sfoodpics/run%d', homepath, PTBParams.(char(runNum)).runid)));
-
 for x = 1:length(bmps)
-    y(x) = ~isempty(regexp(bmps(x).name,'\w*bmp$','match'));
+    FoodBmp{x} = imread(fullfile(sprintf('%sfoodpics/run%d/%s', homepath, PTBParams.(char(runNum)).runid, bmps{x})),'bmp');
 end
 
-bmps = bmps(y);
-
-for x = 1:length(bmps)
-    FoodBmp{x} = imread(fullfile(sprintf('%sfoodpics/run%d/%s', homepath, PTBParams.(char(runNum)).runid, bmps(x).name)),'bmp');
-end
-
-% Randomize food order
-Food = randperm(length(FoodBmp));
-
-% Load health information 
-load(fullfile(homepath,'foodpics','healthInfo.mat'));
+% Specify food order (sequential because order is defined in previous
+% chunk)
+Food = 1:length(TrialOrder);
 
 %% Load bid key bitmap into memory
 BidKeyPic = imread(fullfile(homepath, 'BidKeys.bmp'),'BMP');
@@ -45,9 +61,14 @@ BidKeyPic = imread(fullfile(homepath, 'BidKeys.bmp'),'BMP');
 %% Paint bid key bitmap into offscreen palettes
 KeyLegend = Screen('MakeTexture',PTBParams.win,BidKeyPic);
 
-%% Setup jitter
-Jitter = jitter(1,length(FoodBmp),1); %num trials in second position
-Jitter(Jitter > 6) = 6; %truncate max to 6 seconds
+%% Load jitter
+load(fullfile(homepath,'input','jitter.mat'))
+
+% Check to make sure the number of trials and jitter is the same
+if length(Jitter) < length(TrialOrder)
+    error(sprintf('There are not enough jitter trials allocated. \nThere are %d jitters and %d trials. \nCheck jitter file %s and consider rerunning runJitter.m', ...
+        length(Jitter), length(TrialOrder), fullfile(homepath,'input','jitter.mat')))
+end
 
 %% Initialize keys
 inputDevice = PTBParams.keys.deviceNum;
@@ -81,7 +102,7 @@ for trial = 1:length(FoodBmp) %num trials
 
     BidDuration = BidOffset-BidOnset;
     logData(PTBParams.datafile,runNum,trial,TrialStart,ISI,FoodOn,BidOn,FoodOnset,...
-            BidOnset,FoodDuration,BidDuration,FoodPic,FoodNum,HealthCond,Resp,RT);
+            BidOnset,FoodDuration,BidDuration,FoodPic,FoodNum,Cond,HealthCond,LikingCond,LikingRating,Resp,RT);
 end
 
 % Wait for 10 seconds and log end time
