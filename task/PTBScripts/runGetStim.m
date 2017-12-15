@@ -133,8 +133,6 @@ last = n;
       last = last + n;
     end
 
-    clear x y
-
 % Disiked foods: Specify runs and first and last images to select from top images
 n = length(healthydisliked_rand)/nruns;
 first = 1;
@@ -156,8 +154,6 @@ last = n;
       first = first + n;
       last = last + n;
     end
-
-    clear x y
 
 % Check images to ensure no image is selected twice
 runcheck = who('run*_healthy*');
@@ -231,8 +227,6 @@ last = n;
       last = last + n;
     end
 
-    clear x y
-
 % Disliked foods: Specify runs and first and last images to select from top images
 n = length(unhealthydisliked_rand)/nruns;
 first = 1;
@@ -254,8 +248,6 @@ last = n;
       first = first + n;
       last = last + n;
     end
-
-    clear x y
 
 % Check images to ensure no image is selected twice
 runcheck = who('run*_unhealthy*');
