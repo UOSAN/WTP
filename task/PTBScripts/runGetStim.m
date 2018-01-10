@@ -35,7 +35,7 @@ subinput = sprintf('%sinput/%s%s_ratings.csv',homepath,study,subjid);
 % Load image rating info
 if exist(subinput)
     fid=fopen(subinput);
-    imageinfo = textscan(fid, '%n%s%s', 'Delimiter', ',');
+    imageinfo = textscan(fid, '%n%n%s', 'Delimiter', ',', 'treatAsEmpty','NULL', 'EmptyValue', NaN);
     fclose(fid);
 else
     error(sprintf('Subject input file (%s) does not exist',subinput));
