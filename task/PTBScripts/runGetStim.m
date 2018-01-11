@@ -1,13 +1,13 @@
-%% runImages.m %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% runGetStim.m %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % Author: Dani Cosme
 %
-% Description: This script selects food images based on their ratings,
-% randomizes them, separates them into runs, and adds the images to the run
-% directories in task/foodpics/run[X] 
+% Description: This script selects food images based on their ratings 
+% and health category, randomizes them, separates them into runs, and adds
+% the images to the run directories in task/foodpics/run[X] 
 % 
-% Inputs: Ratings .csv file in WTP/input with the following name:
-%   [study][subject ID]_ratings.csv (e.g. DEV999_ratings.csv)
+% Inputs: Ratings .csv file in dropbox path (defined below) with the 
+% following name: [study][subject ID]_ratings.csv (e.g. DEV999_ratings.csv)
 % 
 % Outputs: Trial condition info saved as a .mat file in WTP/input. This
 %   file is used when running the task via runWTP.m
@@ -29,8 +29,11 @@ nruns = input('Number of runs (DEV = 4):  ');
 ntrials = input('Total number of trials per condition (DEV = 16):  ');
 
 %% Load image info
+% Define dropbox path
+dxpath = '/Users/Shared/Dropbox (PfeiBer Lab)/Devaluation/Tasks/ImageSelection/output/WTP'; % check this
+
 % Define subject input file
-subinput = sprintf('%sinput/%s%s_ratings.csv',homepath,study,subjid);
+subinput = sprintf('%s/%s%s_ratings.csv',dxpath,study,subjid);
 
 % Load image rating info
 if exist(subinput)
@@ -71,13 +74,20 @@ for i = 1:nruns
 end
 
 %% Sort healthy foods into runs
-% Select healthy images
-healthyidx = find(strcmp(imageinfo{1,2},'healthy'));
+% Select healthy images (healthy = 1, unhealthy = 0)
+healthyidx = imageinfo{1,2} == 1;
 healthyimages = imageinfo{1,3}(healthyidx);
 healthyratings = imageinfo{1,1}(healthyidx);
 
+% Code NaN ratings as 0 for sorting
+healthyratingsNaN = healthyratings;
+if sum(isnan(healthyratingsNaN)) > 0
+    warning('Converting NaNs to 0');
+    healthyratingsNaN(isnan(healthyratingsNaN)) = 0;
+end
+
 % Sort images by rating (ascending 1-4)
-[sortedvals, sortidx] = sort(healthyratings);
+[sortedvals, sortidx] = sort(healthyratingsNaN);
 
 % Check if there are enough trials with ratings 1-4 and exclude 0s
 sumtrials = sum(sortedvals > 0);
@@ -98,7 +108,7 @@ randidx = [];
 
 for i = 1:length(vals)
     val = vals(i);
-    validx = sortidx_g0(find(sortedvals_g0 == val));
+    validx = sortidx_g0(sortedvals_g0 == val);
     temp = validx(randperm(length(validx)));
     randidx = vertcat(randidx,temp);
 end
@@ -116,44 +126,44 @@ n = length(healthyliked_rand)/nruns;
 first = 1;
 last = n; 
 
-    % Create run variables with image positions for healthy liked foods
-    disp('Adding healthy liked foods to run directories')
-    for i = 1:nruns
-      % specify image positions and images
-      evalc(sprintf('run%d_healthy_liked = healthyliked_rand(first:last)', i));
+% Create run variables with image positions for healthy liked foods
+disp('Adding healthy liked foods to run directories')
+for i = 1:nruns
+  % specify image positions and images
+  evalc(sprintf('run%d_healthy_liked = healthyliked_rand(first:last)', i));
 
-      % move images
-      for j = 1:length(eval(sprintf('run%d_healthy_liked',i)))
-          runimg = eval(sprintf('run%d_healthy_liked{j}', i));
-          copyfile(sprintf('%sfoodpics/healthy/%s',homepath,runimg), sprintf('%sfoodpics/run%d',homepath,i));
-      end
+  % move images
+  for j = 1:length(eval(sprintf('run%d_healthy_liked',i)))
+      runimg = eval(sprintf('run%d_healthy_liked{j}', i));
+      copyfile(sprintf('%sfoodpics/healthy/%s',homepath,runimg), sprintf('%sfoodpics/run%d',homepath,i));
+  end
 
-      % update iterators
-      first = first + n;
-      last = last + n;
-    end
+  % update iterators
+  first = first + n;
+  last = last + n;
+end
 
 % Disiked foods: Specify runs and first and last images to select from top images
 n = length(healthydisliked_rand)/nruns;
 first = 1;
 last = n; 
 
-    % Create run variables with image positions for healthy liked foods
-    disp('Adding healthy disliked foods to run directories')
-    for i = 1:nruns
-      % specify image positions and images
-      evalc(sprintf('run%d_healthy_disliked = healthydisliked_rand(first:last)', i));
+% Create run variables with image positions for healthy liked foods
+disp('Adding healthy disliked foods to run directories')
+for i = 1:nruns
+  % specify image positions and images
+  evalc(sprintf('run%d_healthy_disliked = healthydisliked_rand(first:last)', i));
 
-      % move images
-      for j = 1:length(eval(sprintf('run%d_healthy_disliked',i)))
-          runimg = eval(sprintf('run%d_healthy_disliked{j}', i));
-          copyfile(sprintf('%sfoodpics/healthy/%s',homepath,runimg), sprintf('%sfoodpics/run%d',homepath,i));
-      end
+  % move images
+  for j = 1:length(eval(sprintf('run%d_healthy_disliked',i)))
+      runimg = eval(sprintf('run%d_healthy_disliked{j}', i));
+      copyfile(sprintf('%sfoodpics/healthy/%s',homepath,runimg), sprintf('%sfoodpics/run%d',homepath,i));
+  end
 
-      % update iterators
-      first = first + n;
-      last = last + n;
-    end
+  % update iterators
+  first = first + n;
+  last = last + n;
+end
 
 % Check images to ensure no image is selected twice
 runcheck = who('run*_healthy*');
@@ -165,13 +175,20 @@ end
 disp(sort(b));
 
 %% Sort unhealthy foods into runs
-% Select unhealthy images
-unhealthyidx = find(strcmp(imageinfo{1,2},'unhealthy'));
+% Select unhealthy images (healthy = 1, unhealthy = 0)
+unhealthyidx = imageinfo{1,2} == 0;
 unhealthyimages = imageinfo{1,3}(unhealthyidx);
 unhealthyratings = imageinfo{1,1}(unhealthyidx);
 
+% Code NaN ratings as 0 for sorting
+unhealthyratingsNaN = unhealthyratings;
+if sum(isnan(unhealthyratingsNaN)) > 0
+    warning('Converting NaNs to 0');
+    unhealthyratingsNaN(isnan(unhealthyratingsNaN)) = 0;
+end
+
 % Sort images by rating (ascending 1-4)
-[sortedvals, sortidx] = sort(unhealthyratings);
+[sortedvals, sortidx] = sort(unhealthyratingsNaN);
 
 % Check if there are enough trials with ratings 1-4 and exclude 0s
 sumtrials = sum(sortedvals > 0);
@@ -192,7 +209,7 @@ randidx = [];
 
 for i = 1:length(vals)
     val = vals(i);
-    validx = sortidx_g0(find(sortedvals_g0 == val));
+    validx = sortidx_g0(sortedvals_g0 == val);
     temp = validx(randperm(length(validx)));
     randidx = vertcat(randidx,temp);
 end
@@ -210,44 +227,44 @@ n = length(healthyliked_rand)/nruns;
 first = 1;
 last = n; 
 
-    % Create run variables with image positions for unhealthy liked foods
-    disp('Adding unhealthy liked foods to run directories')
-    for i = 1:nruns
-      % specify image positions and images
-      evalc(sprintf('run%d_unhealthy_liked = unhealthyliked_rand(first:last)', i));
+% Create run variables with image positions for unhealthy liked foods
+disp('Adding unhealthy liked foods to run directories')
+for i = 1:nruns
+  % specify image positions and images
+  evalc(sprintf('run%d_unhealthy_liked = unhealthyliked_rand(first:last)', i));
 
-      % move images
-      for j = 1:length(eval(sprintf('run%d_unhealthy_liked',i)))
-          runimg = eval(sprintf('run%d_unhealthy_liked{j}', i));
-          copyfile(sprintf('%sfoodpics/unhealthy/%s',homepath,runimg), sprintf('%sfoodpics/run%d',homepath,i));
-      end
+  % move images
+  for j = 1:length(eval(sprintf('run%d_unhealthy_liked',i)))
+      runimg = eval(sprintf('run%d_unhealthy_liked{j}', i));
+      copyfile(sprintf('%sfoodpics/unhealthy/%s',homepath,runimg), sprintf('%sfoodpics/run%d',homepath,i));
+  end
 
-      % update iterators
-      first = first + n;
-      last = last + n;
-    end
+  % update iterators
+  first = first + n;
+  last = last + n;
+end
 
 % Disliked foods: Specify runs and first and last images to select from top images
 n = length(unhealthydisliked_rand)/nruns;
 first = 1;
 last = n; 
 
-    % Create run variables with image positions for unhealthy liked foods
-    disp('Adding unhealthy disliked foods to run directories')
-    for i = 1:nruns
-      % specify image positions and images
-      evalc(sprintf('run%d_unhealthy_disliked = unhealthydisliked_rand(first:last)', i));
+% Create run variables with image positions for unhealthy liked foods
+disp('Adding unhealthy disliked foods to run directories')
+for i = 1:nruns
+  % specify image positions and images
+  evalc(sprintf('run%d_unhealthy_disliked = unhealthydisliked_rand(first:last)', i));
 
-      % move images
-      for j = 1:length(eval(sprintf('run%d_unhealthy_disliked',i)))
-          runimg = eval(sprintf('run%d_unhealthy_disliked{j}', i));
-          copyfile(sprintf('%sfoodpics/unhealthy/%s',homepath,runimg), sprintf('%sfoodpics/run%d',homepath,i));
-      end
+  % move images
+  for j = 1:length(eval(sprintf('run%d_unhealthy_disliked',i)))
+      runimg = eval(sprintf('run%d_unhealthy_disliked{j}', i));
+      copyfile(sprintf('%sfoodpics/unhealthy/%s',homepath,runimg), sprintf('%sfoodpics/run%d',homepath,i));
+  end
 
-      % update iterators
-      first = first + n;
-      last = last + n;
-    end
+  % update iterators
+  first = first + n;
+  last = last + n;
+end
 
 % Check images to ensure no image is selected twice
 runcheck = who('run*_unhealthy*');
