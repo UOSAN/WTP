@@ -21,6 +21,7 @@ homepath=PTBParams.homepath;
 
 %% Load trial and subject condition info
 % Load trial condition order info (design created using the CAN lab GA)
+% https://github.com/UOSAN/CanLabCore_GA/tree/master/SAN_GAs/DEV
 TrialOrder = {'unhealthy_liked', 'healthy_liked', 'healthy_liked', ...
     'unhealthy_disliked', 'unhealthy_liked', 'healthy_disliked', ...
     'unhealthy_liked', 'unhealthy_disliked', 'healthy_liked', ...
@@ -29,7 +30,12 @@ TrialOrder = {'unhealthy_liked', 'healthy_liked', 'healthy_liked', ...
 
 % Load subject condition info
 subinput = sprintf('%sinput/%s%d_condinfo.mat',homepath,study,PTBParams.subjid);
-load(subinput)
+
+if exist(subinput)
+    load(subinput);
+else
+    error('Subject input file (%s) does not exist. \nPlease ensure you have run runGetStimWTP.m',subinput);
+end
 
 % Define image order based on trial and condition info
 bmps = cell(1,length(TrialOrder));
@@ -66,8 +72,8 @@ load(fullfile(homepath,'input','jitter.mat'))
 
 % Check to make sure the number of trials and jitter is the same
 if length(Jitter) < length(TrialOrder)
-    error(sprintf('There are not enough jitter trials allocated. \nThere are %d jitters and %d trials. \nCheck jitter file %s and consider rerunning runJitter.m', ...
-        length(Jitter), length(TrialOrder), fullfile(homepath,'input','jitter.mat')))
+    error('There are not enough jitter trials allocated. \nThere are %d jitters and %d trials. \nCheck jitter file %s and consider rerunning runJitter.m', ...
+        length(Jitter), length(TrialOrder), fullfile(homepath,'input','jitter.mat'))
 end
 
 %% Initialize keys
