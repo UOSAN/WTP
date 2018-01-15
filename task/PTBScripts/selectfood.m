@@ -13,8 +13,8 @@ addpath(fullfile(homepath,'PTBScripts'));
 
 %% Get subject and run info
 study = input('Study name:  ', 's');
-subjid = input('Subject number:  ', 's');
-ssnid = input('Session number:  ', 's');
+subjid = input('Subject number (3 digits):  ', 's');
+ssnid = input('Session number (1-4):  ', 's');
 inMRI = input('MRI session? 0 = no, 1 = yes: ');
 
 %% Initialize variables
@@ -22,9 +22,16 @@ FoodstoSelect = [];
 Bids = [];
 
 %% Load data and PTB files
-load(fullfile(homepath, 'SubjectData', [study subjid], [study,'.',subjid,'.',ssnid,'.mat']));
-load(fullfile(homepath, 'SubjectData', [study subjid], ['PTBParams.',subjid,'.',ssnid,'.mat']));
+datapath = fullfile(homepath, 'SubjectData', [study subjid], [study,'.',subjid,'.',ssnid,'.mat']);
+ptbpath = fullfile(homepath, 'SubjectData', [study subjid], ['PTBParams.',subjid,'.',ssnid,'.mat']);
 
+if exist(datapath)
+    load(datapath);
+    load(ptbpath);
+else
+    error('Subject input file (%s) does not exist. \nCheck subject ID and session number.',datapath);
+end
+    
 nRuns = length(find(~cellfun(@isempty,regexp(fieldnames(Data),'run[1-9]{1}'))));
 for i = 1:nRuns
     runName = sprintf('run%d',i);
@@ -152,4 +159,4 @@ disp(['Food selected: ',char(foodName)]);
 disp(['Participant bid: ',cur2str(bid)]);
 disp(['Random bid: ',cur2str(bidRand)]);
 disp(match);
-disp(['Money left: ',cur2str(2-bid)]);
+disp(['Money left: ',cur2str(1.5-bid)]);
