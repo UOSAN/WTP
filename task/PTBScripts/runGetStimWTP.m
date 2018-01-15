@@ -1,4 +1,4 @@
-%% runGetStim.m %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% runGetStimWTP.m %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % Author: Dani Cosme
 %
@@ -18,15 +18,17 @@ pathtofile = mfilename('fullpath');
 homepath = pathtofile(1:(regexp(pathtofile,'PTBScripts') - 1));
 addpath(fullfile(homepath,'PTBScripts'));
 
-cd(homepath);
+cd(homepath); 
 clear all; close all; Screen('CloseAll'); 
 homepath = [pwd '/'];
 
 %% Get study, subject id, and number of runs from user
 study = input('Study name:  ', 's');
-subjid = input('Subject number:  ', 's');
-nruns = input('Number of runs (DEV = 4):  ');
-ntrials = input('Total number of trials per condition (DEV = 16):  ');
+subjid = input('Subject number (3 digits):  ', 's');
+% nruns = input('Number of runs (DEV = 4):  ');
+% ntrials = input('Total number of trials per condition (DEV = 16):  ');
+nruns = 4;
+ntrials = 16;
 
 %% Load image info
 % Define dropbox path
@@ -172,7 +174,14 @@ for i = 1:length(runcheck)
     a = eval(runcheck{i});
     b = vertcat(b,a);
 end
-disp(sort(b));
+
+[unique_b, i] = unique(b,'first');
+duplicates = b(not(ismember(1:numel(b),i)));
+
+if ~isempty(duplicates)
+    disp(sort(b));
+    error('Duplicate files found. Please check ensure there are enough healthy stimuli available.');
+end
 
 %% Sort unhealthy foods into runs
 % Select unhealthy images (healthy = 1, unhealthy = 0)
@@ -267,13 +276,20 @@ for i = 1:nruns
 end
 
 % Check images to ensure no image is selected twice
-runcheck = who('run*_unhealthy*');
+runcheck = who('run*_healthy*');
 b = [];
 for i = 1:length(runcheck)
     a = eval(runcheck{i});
     b = vertcat(b,a);
 end
-disp(sort(b));
+
+[unique_b, i] = unique(b,'first');
+duplicates = b(not(ismember(1:numel(b),i)));
+
+if ~isempty(duplicates)
+    disp(sort(b));
+    error('Duplicate files found. Please check ensure there are enough unhealthy stimuli available.');
+end
 
 %% Get ratings for selected images
 selected = vertcat(healthyliked, healthydisliked, unhealthyliked, unhealthydisliked);
