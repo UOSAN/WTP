@@ -9,7 +9,7 @@ Originally adapted from Hutcherson et al. (2012).
 This script creates a vector with jitter times based on the number of trials per run. It is saved as `WTP/task/input/jitter.m`. The same jitter vector is used in each run. This script only needs to be run once (or until a desired vector is achieved) per study. User inputs include:
 - Number of trials in each run
 
-**`runGetStim.m`** 
+**`runGetStimWTP.m`** 
 This script selects images based on subject ratings, randomizes the images within each health (healthy and unhealthy) and liking (liked and disliked) category, splits the images based on the number of runs, and populates the image run folders `foodpics/run1` etc. User inputs include:
 - Study name
 - Subject ID
