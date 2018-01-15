@@ -1,4 +1,4 @@
-function [ keys ] = initKeys_money()
+function [ keys ] = initKeys()
 % % INITKEYS.m %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %   queries PsychHID('Devices') & sets device values
@@ -68,7 +68,7 @@ keys.kill = KbName('k');
 % to disable detection of the trigger pulse:
 % olddisabledkeys=DisableKeysForKbCheck([KbName(52), KbName('0)')])
 
-% to re-enable detection of the trigger pulse:sca
+% to re-enable detection of the trigger pulse
 
 % olddisabledkeys=DisableKeysForKbCheck([])
 end
