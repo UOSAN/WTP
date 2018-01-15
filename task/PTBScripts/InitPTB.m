@@ -19,9 +19,9 @@ homepath = [pwd '/'];
 checksubjid = 1;
 while checksubjid == 1
     study = input('Study name:  ', 's');
-    subjid = input('Subject number:  ', 's');
-    ssnid = input('Session number:  ', 's');
-    runid = input('Run number:  ');
+    subjid = input('Subject number (3 digits):  ', 's');
+    ssnid = input('Session number (1-5):  ', 's');
+    runid = input('Run number (1-4):  ');
     
     if runid == 1 && (exist(fullfile(homepath, 'SubjectData', [study subjid], [study,'.',subjid,'.',ssnid,'.mat']),'file') == 2)
         cont = input('WARNING: Datafile already exists!  Overwrite? (y/n)  ','s');
@@ -104,7 +104,7 @@ PTBParams.datafile = datafile;
 PTBParams.homepath = homepath;
 PTBParams.subjid = str2double(subjid);
 PTBParams.ssnid = ssnid;
-PTBParams.keys = initKeys_money;
+PTBParams.keys = initKeys;
 PTBParams.inMRI = inMRI;
 PTBParams.(char(runNum)).runid = runid;
 
