@@ -19,7 +19,7 @@ TrialStart = Screen(PTBParams.win,'Flip');
 
 % Display food
 foodCoords = findPicLoc(size(FoodBmp{Food(trial)}),[.5,.45],PTBParams,'ScreenPct',.55);
-keyCoords = findPicLoc(size(BidKeyPic),[.5,.85],PTBParams,'ScreenPct',.35);
+keyCoords = findPicLoc(size(BidKeyPic),[.5,.85],PTBParams,'ScreenPct',.25);
 FoodScreen = Screen('MakeTexture',PTBParams.win,FoodBmp{Food(trial)});
 Screen('DrawTexture',PTBParams.win,FoodScreen,[],foodCoords);
 FoodOn = Screen(PTBParams.win,'Flip', TrialStart+ISI); %ISI = 3.5, added jitter here instead of using the jitterfix function, DEC 15.4.27, TrialStart+1.5
