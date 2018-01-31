@@ -300,3 +300,6 @@ images = imageinfo{1,3}(cell2mat(selectedidx) == 1);
 %% Save subject trial condition output
 suboutput = sprintf('%sinput/%s%s_condinfo.mat',homepath,study,subjid);
 save(suboutput, 'run*_*', 'images','ratings')
+
+%% Clean up
+clear all; close all; Screen('CloseAll'); 
