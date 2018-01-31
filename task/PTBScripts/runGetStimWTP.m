@@ -32,7 +32,7 @@ ntrials = 16;
 
 %% Load image info
 % Define dropbox path
-dxpath = '/Users/Shared/Dropbox (PfeiBer Lab)/Devaluation/Tasks/ImageSelection/output/WTP'; % check this
+dxpath = '~/Dropbox (PfeiBer Lab)/Devaluation/Tasks/ImageSelection/output/WTP'; % check this
 
 % Define subject input file
 subinput = sprintf('%s/%s%s_ratings.csv',dxpath,study,subjid);
