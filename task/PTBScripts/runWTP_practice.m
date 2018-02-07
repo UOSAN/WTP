@@ -79,7 +79,7 @@ end
 % Wait for 2 seconds and close
 DrawFormattedText(PTBParams.win,'The task is now complete.','center','center',PTBParams.white); %DCos 2015.5.12, added end screen
 Screen(PTBParams.win,'Flip');
-WaitSecs(2);
+WaitSecs(4);
 
 %% Close screen
 if ~exist('sprout')
