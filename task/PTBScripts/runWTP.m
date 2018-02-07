@@ -19,6 +19,9 @@ addpath(fullfile(homepath,'PTBScripts'));
 [PTBParams, runNum, study] = InitPTB(homepath);
 homepath=PTBParams.homepath;
 
+%% Set dropbox path for copying
+dropboxDir = '~/Dropbox (PfeiBer Lab)/Devaluation/Tasks/WTP/output';
+
 %% Load trial and subject condition info
 % Load trial condition order info (design created using the CAN lab GA)
 % https://github.com/UOSAN/CanLabCore_GA/tree/master/SAN_GAs/DEV
@@ -113,18 +116,30 @@ for trial = 1:length(FoodBmp) %num trials
             BidOnset,FoodDuration,BidDuration,FoodPic,FoodNum,Cond,HealthCond,LikingCond,LikingRating,Resp,RT);
 end
 
-% Wait for 10 seconds and log end time
-WaitSecs(10);
+% Wait for 6 seconds and log end time
+WaitSecs(6);
 EndTime = GetSecs-StartTime;
 logData(datafile,runNum,1, EndTime);
 
 DrawFormattedText(PTBParams.win,'The task is now complete.','center','center',PTBParams.white);
 Screen(PTBParams.win,'Flip'); 
-WaitSecs(2);
+WaitSecs(4);
 
 %% Close screen
 if ~exist('sprout')
     % Housekeeping after the party
     Screen('CloseAll');
     ListenChar(0);
+end
+
+
+%% Copy file to dropbox
+subCode = sprintf('DEV%d',PTBParams.subjid);
+subDir = fullfile(dropboxDir,subCode);
+if ~exist(subDir)
+    copyfile(sprintf('SubjectData/%s',subCode), subDir)
+    disp(sprintf('Output file copied to %s',subDir))
+else
+    copyfile(sprintf('SubjectData/%s/',subCode), subDir)
+    disp(sprintf('Output file copied to %s',subDir))
 end
