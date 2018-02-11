@@ -32,7 +32,7 @@ TrialOrder = {'unhealthy_liked', 'healthy_liked', 'healthy_liked', ...
     'healthy_disliked', 'healthy_disliked', 'healthy_liked', 'unhealthy_liked'};
 
 % Load subject condition info
-subinput = sprintf('%sinput/%s%d_condinfo.mat',homepath,study,PTBParams.subjid);
+subinput = sprintf('%sinput/%s%d_%s_condinfo.mat',homepath,study,PTBParams.subjid, PTBParams.ssnid);
 
 if exist(subinput)
     load(subinput);
@@ -132,14 +132,13 @@ if ~exist('sprout')
     ListenChar(0);
 end
 
-
 %% Copy file to dropbox
 subCode = sprintf('DEV%d',PTBParams.subjid);
 subDir = fullfile(dropboxDir,subCode);
 if ~exist(subDir)
-    copyfile(sprintf('SubjectData/%s',subCode), subDir)
-    disp(sprintf('Output file copied to %s',subDir))
+    copyfile(sprintf('SubjectData/%s',subCode), subDir);
+    disp(sprintf('Output file copied to %s',subDir));
 else
-    copyfile(sprintf('SubjectData/%s/',subCode), subDir)
-    disp(sprintf('Output file copied to %s',subDir))
+    copyfile(sprintf('SubjectData/%s/',subCode), subDir);
+    disp(sprintf('Output file copied to %s',subDir));
 end
