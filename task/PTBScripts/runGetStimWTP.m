@@ -22,9 +22,11 @@ cd(homepath);
 clear all; close all; Screen('CloseAll'); 
 homepath = [pwd '/'];
 
-%% Get study, subject id, and number of runs from user
-study = input('Study name:  ', 's');
+%% Get study, subject id, and session number from user
+study = 'DEV'; %removed user input for convenience 
 subjid = input('Subject number (3 digits):  ', 's');
+ssnid = input('Session number (1-5):  ', 's');
+
 % nruns = input('Number of runs (DEV = 4):  ');
 % ntrials = input('Total number of trials per condition (DEV = 16):  ');
 nruns = 4;
@@ -298,7 +300,7 @@ ratings = imageinfo{1,1}(cell2mat(selectedidx) == 1);
 images = imageinfo{1,3}(cell2mat(selectedidx) == 1);
 
 %% Save subject trial condition output
-suboutput = sprintf('%sinput/%s%s_condinfo.mat',homepath,study,subjid);
+suboutput = sprintf('%sinput/%s%s_%s_condinfo.mat',homepath,study,subjid,ssnid);
 save(suboutput, 'run*_*', 'images','ratings')
 
 %% Clean up
