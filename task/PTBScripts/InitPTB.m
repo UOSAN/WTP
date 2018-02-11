@@ -18,7 +18,7 @@ homepath = [pwd '/'];
 % Check to make sure aren't about to overwrite duplicate session!
 checksubjid = 1;
 while checksubjid == 1
-    study = input('Study name:  ', 's');
+    study = 'DEV'; %removed user input for convenience
     subjid = input('Subject number (3 digits):  ', 's');
     ssnid = input('Session number (1-5):  ', 's');
     runid = input('Run number (1-4):  ');
