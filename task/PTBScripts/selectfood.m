@@ -12,7 +12,7 @@ homepath = pathtofile(1:(regexp(pathtofile,'PTBScripts') - 1));
 addpath(fullfile(homepath,'PTBScripts'));
 
 %% Get subject and run info
-study = input('Study name:  ', 's');
+study = 'DEV'; %removed user input for convenience 
 subjid = input('Subject number (3 digits):  ', 's');
 ssnid = input('Session number (1-4):  ', 's');
 inMRI = input('MRI session? 0 = no, 1 = yes: ');
@@ -20,6 +20,7 @@ inMRI = input('MRI session? 0 = no, 1 = yes: ');
 %% Initialize variables
 FoodstoSelect = [];
 Bids = [];
+HealthCond = [];
 
 %% Load data and PTB files
 datapath = fullfile(homepath, 'SubjectData', [study subjid], [study,'.',subjid,'.',ssnid,'.mat']);
@@ -37,10 +38,8 @@ for i = 1:nRuns
     runName = sprintf('run%d',i);
     FoodstoSelect = [FoodstoSelect, Data.(char(runName)).FoodPic];
     Bids = [Bids, Data.(char(runName)).Resp];
+    HealthCond = [HealthCond, Data.(char(runName)).HealthCond];
 end
-
-% Load health information 
-load(fullfile(homepath,'foodpics','healthInfo.mat'));
 
 %% Choose a random trial
 choosefood = randperm(length(FoodstoSelect));
@@ -58,8 +57,6 @@ while foodchosen == 0
         iter = iter+1;
     else
         disp('Food found.')
-        healthDir = HealthConds(strcmp(FoodImages, foodpics{find(x==1)}));
-        food = imread(fullfile(homepath,'foodpics',char(healthDir),foodpics{find(x==1)}), 'BMP');
         foodchosen = 1;
         bid = Bids(choosefood(iter));
         trial = num2str(choosefood(iter));
@@ -95,68 +92,14 @@ else
     match = 'No match. You will not recieve this snack.';
 end
 
-    
-%% Initialize Screen
-% AssertOpenGL;
-% ListenChar(2); % don't print keypresses to screen
-% %   Screen('Preference', 'SkipSyncTests', 1); % use if VBL fails
-% Screen('Preference', 'VisualDebugLevel',3);
-% 
-% HideCursor;
-% screenNum = 0;
-% 
-% if str2double(subjid) > 900
-%     %[w, rect] = Screen('OpenWindow',screenNum);
-%     [w, rect] = Screen('OpenWindow',screenNum, [], [0 0 800 600]); %partial screen mode, for debugging
-% else
-%     [w, rect] = Screen('OpenWindow',screenNum);
-% end
-% 
-% ctr = [rect(3)/2, rect(4)/2]; 
-% white=WhiteIndex(w);
-% black=BlackIndex(w);
-% gray = (WhiteIndex(w) + BlackIndex(w))/2;
-% ifi = Screen('GetFlipInterval', w);
-% 
-% % setup screen
-% Screen(w,'TextSize',round(.1*ctr(2)));
-% Screen('TextFont',w,'Helvetica');
-% Screen('FillRect',w,black);
-%     
-% %% Draw text
-% DrawFormattedText(PTBParams.win,['Trial selected: ' trial],'center',PTBParams.ctr(2)-.8*PTBParams.ctr(2),PTBParams.white);
-% Screen(w,'Flip',[],1);
-% Screen(w,'Flip');
-% DrawFormattedText(PTBParams.win,'Food on trial ','center',PTBParams.ctr(2)-.8*PTBParams.ctr(2),PTBParams.white);
-% WaitSecs(1.5);
-% Screen(w,'Flip',[],1);
-% FoodPic=Screen('MakeTexture',PTBParams.win,food);
-% Screen('DrawTexture',PTBParams.win,FoodPic);
-% WaitSecs(1.5);
-% Screen(w,'Flip',[],1);
-% DrawFormattedText(PTBParams.win,['Random bid selected: ',cur2str(bidRand)],'center',PTBParams.ctr(2)-.6*PTBParams.ctr(2),PTBParams.white);
-% WaitSecs(1.5);
-% Screen(w,'Flip',[],1);
-% DrawFormattedText(PTBParams.win,['Your bid on trial: ',cur2str(bid)],'center',PTBParams.ctr(2)+.8*PTBParams.ctr(2),PTBParams.white);
-% WaitSecs(2);
-% Screen(w,'Flip');
-% DrawFormattedText(PTBParams.win,match,'center',PTBParams.white);
-% WaitSecs(2);
-% Screen(w,'Flip');
-% 
-% while ~GetChar
-% end
-% 
-% %% Housekeeping after the party
-%  Screen('CloseAll');
-%  ListenChar(0);
- 
 %% Display information in the command window
+clc
 disp('---------------------');
 disp('Auction results');
 disp('---------------------');
 disp(['Food selected: ',char(foodName)]);
 disp(['Participant bid: ',cur2str(bid)]);
 disp(['Random bid: ',cur2str(bidRand)]);
+disp(' ');
 disp(match);
 disp(['Money left: ',cur2str(1.5-bid)]);
