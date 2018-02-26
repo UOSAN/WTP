@@ -52,7 +52,7 @@ PTBParams.black = black;
 PTBParams.gray = gray;
 PTBParams.ifi = ifi;
 PTBParams.homepath = homepath;
-PTBParams.keys = initKeys;
+PTBParams.keys = initKeys(inMRI);
 PTBParams.inMRI = inMRI;
 
 % Flip screen

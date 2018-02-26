@@ -1,4 +1,4 @@
-function [ keys ] = initKeys()
+function [ keys ] = initKeys(inMRI)
 % % INITKEYS.m %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %   queries PsychHID('Devices') & sets device values
@@ -21,25 +21,29 @@ function [ keys ] = initKeys()
 %% set up button box / keyboard
 devices=PsychHID('Devices');
 for deviceCount=1:length(devices),
-  % the lcni button box has the usageName 'Keyboard' and the product 'Xkeys'
-  if (strcmp(devices(deviceCount).usageName,'Keyboard') && strcmp(devices(deviceCount).product,'Xkeys')),
-    keys.bbox = deviceCount;
-    keys.trigger = 52; % trigger pulse / TR signal key ('`') for LCNI scanner
-    fprintf('button box detected\n using device #%d: %s\n',deviceCount,devices(deviceCount).product);
-    break,
-  % iMac setup has the usagename 'Keyboard' and the manufacturer 'Apple'
-  elseif (strcmp(devices(deviceCount).usageName,'Keyboard') && strcmp(devices(deviceCount).manufacturer,'Apple')), %DCos 2015.5.8, replaced 'Microsoft'
-    keys.bbox = deviceCount;
-    keys.trigger = KbName('SPACE'); % use spacebar as KbTrigger
-    fprintf('Using Device #%d: external %s\n',deviceCount,devices(deviceCount).usageName);
-    break,
-  % MacBook laptop setup has the usagename 'Keyboard' and the product 'Apple Internal Keyboard / Trackpad'
-  elseif (strcmp(devices(deviceCount).usageName,'Keyboard') && strcmp(devices(deviceCount).product,'Apple Internal Keyboard / Trackpad')),
-    keys.bbox = deviceCount;
-    keys.trigger = KbName('SPACE'); % use spacebar as KbTrigger
-    fprintf('Using Device #%d: internal %s\n',deviceCount,devices(deviceCount).usageName);
-    break,
-  end
+    if inMRI == 1
+      % the lcni button box has the usageName 'Keyboard' and the product 'Xkeys'
+      if (strcmp(devices(deviceCount).usageName,'Keyboard') && strcmp(devices(deviceCount).product,'Xkeys')),
+        keys.bbox = deviceCount;
+        keys.trigger = 52; % trigger pulse / TR signal key ('`') for LCNI scanner
+        fprintf('button box detected\n using device #%d: %s\n',deviceCount,devices(deviceCount).product);
+        break,
+      end
+    else
+      % iMac setup has the usagename 'Keyboard' and the manufacturer 'Apple'
+      if (strcmp(devices(deviceCount).usageName,'Keyboard') && strcmp(devices(deviceCount).manufacturer,'Apple')), %DCos 2015.5.8, replaced 'Microsoft'
+        keys.bbox = deviceCount;
+        keys.trigger = KbName('SPACE'); % use spacebar as KbTrigger
+        fprintf('Using Device #%d: external %s\n',deviceCount,devices(deviceCount).usageName);
+        break,
+      % MacBook laptop setup has the usagename 'Keyboard' and the product 'Apple Internal Keyboard / Trackpad'
+      elseif (strcmp(devices(deviceCount).usageName,'Keyboard') && strcmp(devices(deviceCount).product,'Apple Internal Keyboard / Trackpad')),
+        keys.bbox = deviceCount;
+        keys.trigger = KbName('SPACE'); % use spacebar as KbTrigger
+        fprintf('Using Device #%d: internal %s\n',deviceCount,devices(deviceCount).usageName);
+        break,
+      end
+    end
 end
 
 keys.b1 = KbName('1!');   % Keyboard 1

@@ -104,7 +104,7 @@ PTBParams.datafile = datafile;
 PTBParams.homepath = homepath;
 PTBParams.subjid = str2double(subjid);
 PTBParams.ssnid = ssnid;
-PTBParams.keys = initKeys;
+PTBParams.keys = initKeys(inMRI);
 PTBParams.inMRI = inMRI;
 PTBParams.(char(runNum)).runid = runid;
 
