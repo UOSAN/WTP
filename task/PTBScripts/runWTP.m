@@ -25,11 +25,25 @@ dropboxDir = '~/Dropbox (PfeiBer Lab)/Devaluation/Tasks/WTP/output';
 %% Load trial and subject condition info
 % Load trial condition order info (design created using the CAN lab GA)
 % https://github.com/UOSAN/CanLabCore_GA/tree/master/SAN_GAs/DEV
-TrialOrder = {'unhealthy_liked', 'healthy_liked', 'healthy_liked', ...
-    'unhealthy_disliked', 'unhealthy_liked', 'healthy_disliked', ...
-    'unhealthy_liked', 'unhealthy_disliked', 'healthy_liked', ...
-    'healthy_disliked', 'unhealthy_disliked', 'unhealthy_disliked', ...
-    'healthy_disliked', 'healthy_disliked', 'healthy_liked', 'unhealthy_liked'};
+
+if str2num(PTBParams.ssnid) < 3
+    TrialOrder = {'unhealthy_liked', 'healthy_liked', 'healthy_liked', ...
+        'unhealthy_disliked', 'unhealthy_liked', 'healthy_disliked', ...
+        'unhealthy_liked', 'unhealthy_disliked', 'healthy_liked', ...
+        'healthy_disliked', 'unhealthy_disliked', 'unhealthy_disliked', ...
+        'healthy_disliked', 'healthy_disliked', 'healthy_liked', 'unhealthy_liked'};
+else
+    TrialOrder = {'unhealthy_liked', 'healthy_liked', 'healthy_liked', ...
+        'unhealthy_disliked', 'unhealthy_liked', 'healthy_disliked', ...
+        'unhealthy_liked', 'unhealthy_disliked', 'healthy_liked', ...
+        'healthy_disliked', 'unhealthy_disliked', 'unhealthy_disliked', ...
+        'healthy_disliked', 'healthy_disliked', 'healthy_liked', 'unhealthy_liked', ...
+        'unhealthy_liked', 'healthy_liked', 'healthy_liked', ...
+        'unhealthy_disliked', 'unhealthy_liked', 'healthy_disliked', ...
+        'unhealthy_liked', 'unhealthy_disliked', 'healthy_liked', ...
+        'healthy_disliked', 'unhealthy_disliked', 'unhealthy_disliked', ...
+        'healthy_disliked', 'healthy_disliked', 'healthy_liked', 'unhealthy_liked'};
+end
 
 % Load subject condition info
 subinput = sprintf('%sinput/%s%d_%s_condinfo.mat',homepath,study,PTBParams.subjid, PTBParams.ssnid);
@@ -60,8 +74,7 @@ for x = 1:length(bmps)
     FoodBmp{x} = imread(fullfile(sprintf('%sfoodpics/run%d/%s', homepath, PTBParams.(char(runNum)).runid, bmps{x})),'bmp');
 end
 
-% Specify food order (sequential because order is defined in previous
-% chunk)
+% Specify food order (sequential because order is defined in previous chunk)
 Food = 1:length(TrialOrder);
 
 %% Load bid key bitmap into memory
@@ -71,7 +84,11 @@ BidKeyPic = imread(fullfile(homepath, 'BidKeys.bmp'),'BMP');
 KeyLegend = Screen('MakeTexture',PTBParams.win,BidKeyPic);
 
 %% Load jitter
-load(fullfile(homepath,'input','jitter.mat'))
+if str2num(PTBParams.ssnid) < 3
+    load(fullfile(homepath,'input','jitter.mat'))
+else
+    Jitter = ones(length(TrialOrder),1);
+end
 
 % Check to make sure the number of trials and jitter is the same
 if length(Jitter) < length(TrialOrder)
@@ -92,7 +109,7 @@ Screen(PTBParams.win,'Flip');
 
 %% Run task and log data
 % Wait for the trigger before continuing
-% Wait for a 'spacebar' to start the behavioral version, and an ' for the scanner version
+% Wait for   a 'spacebar' to start the behavioral version, and an ' for the scanner version
 scantrig;
 
 datafile = PTBParams.datafile;

@@ -21,7 +21,11 @@ while checksubjid == 1
     study = 'DEV'; %removed user input for convenience
     subjid = input('Subject number (3 digits):  ', 's');
     ssnid = input('Session number (1-5):  ', 's');
-    runid = input('Run number (1-4):  ');
+    if str2num(ssnid) < 3
+        runid = input('Run number (1-4):  ');
+    else 
+        runid = input('Run number (1-2):  ');
+    end
     
     if runid == 1 && (exist(fullfile(homepath, 'SubjectData', [study subjid], [study,'.',subjid,'.',ssnid,'.mat']),'file') == 2)
         cont = input('WARNING: Datafile already exists!  Overwrite? (y/n)  ','s');
@@ -63,7 +67,11 @@ Data.(char(runNum)).time = datestr(now);
 save(datafile,'Data');
 
 %% Initialize parameters for fMRI
-inMRI = input('MRI session? 0 = no, 1 = yes: ');
+if str2num(ssnid) < 3
+    inMRI = input('MRI session? 0 = no, 1 = yes: ');
+else
+    inMRI = 0;
+end
 
 % if no input, default = not in MRI
 if isempty(inMRI)

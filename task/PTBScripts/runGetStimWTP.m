@@ -27,10 +27,26 @@ study = 'DEV'; %removed user input for convenience
 subjid = input('Subject number (3 digits):  ', 's');
 ssnid = input('Session number (1-5):  ', 's');
 
+% specify number of trials and runs
 % nruns = input('Number of runs (DEV = 4):  ');
 % ntrials = input('Total number of trials per condition (DEV = 16):  ');
-nruns = 4;
-ntrials = 16;
+if str2num(ssnid) < 3
+    nruns = 4; % scanner sessions = 1 & 2
+else 
+    nruns = 2; % behavioral sessions = 3-5
+end
+
+if str2num(ssnid) < 3
+    ntrials = 16; % scanner sessions = 1 & 2
+else 
+    ntrials = 32; % behavioral sessions = 3-5
+end
+
+% calculate number of trials per image type
+ncond1 = 2; % healthy + unhealthy
+ncond2 = 2; % liked + disliked
+cond1trials = (nruns*ntrials) / ncond1; % number of healthy and unhealthy images
+condtrials = (nruns*ntrials) / (ncond1*ncond2); % number of liked and disliked healthy and unhealthy images
 
 %% Load image info
 % Define dropbox path
@@ -58,23 +74,33 @@ if length(imageinfo{1,1}) < ntrials*nruns
     error('The number of stimuli available is less than the number of trials specified');
 end
 
-%% Create run directories and remove old images
+%% Create run directories and remove old images and unnecessary run directories
+% Remove current images from run directories
+nrundirs = numel(dir(sprintf('%sfoodpics/run*',homepath)));
+for i = 1:nrundirs
+    rundir = dir(fullfile(sprintf('%sfoodpics/run%d', homepath, i)));
+    if numel(rundir) > 2
+        disp(sprintf('Removing files from run directory %d',i))
+        delete(sprintf('%sfoodpics/run%d/*.bmp', homepath, i));
+    end
+end
+
+% Remove unnecessary run directories
+for i = 1:nrundirs
+    if i > nruns
+        disp(sprintf('Removing unnecessary run directory %d',i))
+        rundir = (sprintf('%sfoodpics/run%d', homepath, i));
+        rmdir(rundir)
+    end
+end
+
 % Create directories if they do not exist
 for i = 1:nruns
     rundir = fullfile(sprintf('%sfoodpics/run%d', homepath, i));
     if ~exist(rundir)
-        disp(sprintf('Run directory %d did not exist. Creating it now.',i))
+        disp(sprintf('Run directory %d did not exist. Creating it now',i))
         mkdir(rundir);
     end 
-end
-
-% Remove current images from run directories
-disp('Removing files from run directories')
-for i = 1:nruns
-    rundir = dir(fullfile(sprintf('%sfoodpics/run%d', homepath, i)));
-    if numel(rundir) > 2
-        delete(sprintf('%sfoodpics/run%d/*.bmp', homepath, i));
-    end
 end
 
 %% Sort healthy foods into runs
@@ -95,12 +121,12 @@ end
 
 % Check if there are enough trials with ratings 1-4 and exclude 0s
 sumtrials = sum(sortedvals > 0);
-deficit = 2*ntrials - sumtrials;
+deficit = cond1trials - sumtrials;
 
 if deficit > 0
     warning(sprintf('Too few images with ratings > 0. Including %d trials rated 0.', deficit));
-    sortedvals_g0 = sortedvals(end-(2*ntrials-1):end);
-    sortidx_g0 = sortidx(end-(2*ntrials-1):end);
+    sortedvals_g0 = sortedvals(end-(cond1trials-1):end);
+    sortidx_g0 = sortidx(end-(cond1trials-1):end);
 else
     sortedvals_g0 = sortedvals(sortedvals > 0);
     sortidx_g0 = sortidx(sortedvals > 0);
@@ -118,8 +144,8 @@ for i = 1:length(vals)
 end
 
 % Select first and last n trials 
-healthyliked = healthyimages(randidx(end-(ntrials-1):end));
-healthydisliked = healthyimages(randidx(1:ntrials));
+healthyliked = healthyimages(randidx(end-(condtrials-1):end));
+healthydisliked = healthyimages(randidx(1:condtrials));
 
 % Randomize images
 healthyliked_rand = healthyliked(randperm(length(healthyliked)));
@@ -203,12 +229,12 @@ end
 
 % Check if there are enough trials with ratings 1-4 and exclude 0s
 sumtrials = sum(sortedvals > 0);
-deficit = 2*ntrials - sumtrials;
+deficit = cond1trials - sumtrials;
 
 if deficit > 0
     warning(sprintf('Too few images with ratings > 0. Including %d trials rated 0.', deficit));
-    sortedvals_g0 = sortedvals(end-(2*ntrials-1):end);
-    sortidx_g0 = sortidx(end-(2*ntrials-1):end);
+    sortedvals_g0 = sortedvals(end-(cond1trials-1):end);
+    sortidx_g0 = sortidx(end-(cond1trials-1):end);
 else
     sortedvals_g0 = sortedvals(sortedvals > 0);
     sortidx_g0 = sortidx(sortedvals > 0);
@@ -226,8 +252,8 @@ for i = 1:length(vals)
 end
 
 % Select first and last n trials 
-unhealthyliked = unhealthyimages(randidx(end-(ntrials-1):end));
-unhealthydisliked = unhealthyimages(randidx(1:ntrials));
+unhealthyliked = unhealthyimages(randidx(end-(condtrials-1):end));
+unhealthydisliked = unhealthyimages(randidx(1:condtrials));
 
 % Randomize images
 unhealthyliked_rand = unhealthyliked(randperm(length(unhealthyliked)));
@@ -298,6 +324,12 @@ selected = vertcat(healthyliked, healthydisliked, unhealthyliked, unhealthydisli
 selectedidx = cellfun(@(x) ismember(x, selected), imageinfo{1,3}, 'UniformOutput', 0);
 ratings = imageinfo{1,1}(cell2mat(selectedidx) == 1);
 images = imageinfo{1,3}(cell2mat(selectedidx) == 1);
+
+%% Print number of runs and images in each run
+for i = 1:nruns
+    n = numel(dir(sprintf('%sfoodpics/run%d/*.bmp',homepath,i)));
+    fprintf('Run directory %d contains %d images\n',i,n);
+end
 
 %% Save subject trial condition output
 suboutput = sprintf('%sinput/%s%s_%s_condinfo.mat',homepath,study,subjid,ssnid);

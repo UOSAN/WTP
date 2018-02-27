@@ -11,7 +11,11 @@
 %% Run script for each trial
 % Specify food image and fixation presentation lengths
 WaitTime = 4; %Specifies how long to wait before bid keys appear
-ISI = Jitter(trial)+3; %Added ISI so that it can be logged, DEC 15.4.27
+if str2num(PTBParams.ssnid) < 3
+    ISI = Jitter(trial)+3; %Added ISI so that it can be logged, DEC 15.4.27
+else
+    ISI = Jitter(trial);
+end
 
 % Display fixation 
 DrawFormattedText(PTBParams.win,'+','center','center',PTBParams.white);
