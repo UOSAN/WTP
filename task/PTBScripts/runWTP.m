@@ -46,7 +46,14 @@ else
 end
 
 % Load subject condition info
-subinput = sprintf('%sinput/%s%d_%s_condinfo.mat',homepath,study,PTBParams.subjid, PTBParams.ssnid);
+if PTBParams.subjid<10
+    placeholder='00';
+elseif PTBParams.subjid<100
+    placeholder='0';
+else
+    placeholder='';
+end
+subinput = sprintf('%sinput/%s%s%d_%s_condinfo.mat',homepath,study,placeholder,PTBParams.subjid, PTBParams.ssnid);
 
 if exist(subinput)
     load(subinput);
