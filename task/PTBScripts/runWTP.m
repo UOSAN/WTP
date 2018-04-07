@@ -46,14 +46,7 @@ else
 end
 
 % Load subject condition info
-if PTBParams.subjid<10
-    placeholder='00';
-elseif PTBParams.subjid<100
-    placeholder='0';
-else
-    placeholder='';
-end
-subinput = sprintf('%sinput/%s%s%d_%s_condinfo.mat',homepath,study,placeholder,PTBParams.subjid, PTBParams.ssnid);
+subinput = sprintf('%sinput/%s%s_%s_condinfo.mat',homepath,study,PTBParams.subjid, PTBParams.ssnid);
 
 if exist(subinput)
     load(subinput);
@@ -157,7 +150,7 @@ if ~exist('sprout')
 end
 
 %% Copy file to dropbox
-subCode = sprintf('DEV%d',PTBParams.subjid);
+subCode = sprintf('DEV%s',PTBParams.subjid);
 subDir = fullfile(dropboxDir,subCode);
 if ~exist(subDir)
     copyfile(sprintf('SubjectData/%s',subCode), subDir);
