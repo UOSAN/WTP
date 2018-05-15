@@ -49,8 +49,9 @@ cond1trials = (nruns*ntrials) / ncond1; % number of healthy and unhealthy images
 condtrials = (nruns*ntrials) / (ncond1*ncond2); % number of liked and disliked healthy and unhealthy images
 
 %% Load image info
-% Define dropbox path
+% Define input and output dropbox path
 dxpath = '~/Dropbox (PfeiBer Lab)/Devaluation/Tasks/ImageSelection/output/WTP'; % check this
+dxpathout = '~/Dropbox (PfeiBer Lab)/Devaluation/Tasks/WTP/output';
 
 % Define subject input file
 subinput = sprintf('%s/%s%s_ratings.csv',dxpath,study,subjid);
@@ -334,6 +335,14 @@ end
 %% Save subject trial condition output
 suboutput = sprintf('%sinput/%s%s_%s_condinfo.mat',homepath,study,subjid,ssnid);
 save(suboutput, 'run*_*', 'images','ratings')
+
+%% Copy to dropbox
+subdir = sprintf('%s/DEV%s/', dxpathout, subjid);
+if ~exist(subdir)
+    mkdir(subdir);
+end
+copyfile(suboutput, subdir);
+disp(sprintf('Stimulus key copied to %s',subdir));
 
 %% Clean up
 clear all; close all; Screen('CloseAll'); 
