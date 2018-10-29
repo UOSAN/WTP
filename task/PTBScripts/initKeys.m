@@ -38,6 +38,7 @@ else
             keys.trigger = KbName('SPACE'); % use spacebar as KbTrigger
             fprintf('Using Device #%d: external %s\n',deviceCount,devices(deviceCount).usageName);
             break
+        % iMac setup has the usagename 'Keyboard' and the manufacturer 'Apple Inc.'
         elseif (strcmp(devices(deviceCount).usageName,'Keyboard') && strcmp(devices(deviceCount).manufacturer,'Apple Inc.'))
             keys.bbox = deviceCount;
             keys.trigger = KbName('SPACE'); % use spacebar as KbTrigger
