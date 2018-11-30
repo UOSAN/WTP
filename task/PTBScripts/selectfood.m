@@ -23,8 +23,9 @@ Bids = [];
 HealthCond = [];
 
 %% Load data and PTB files
-datapath = fullfile(homepath, 'SubjectData', [study subjid], [study,'.',subjid,'.',ssnid,'.mat']);
-ptbpath = fullfile(homepath, 'SubjectData', [study subjid], ['PTBParams.',subjid,'.',ssnid,'.mat']);
+dropboxDir = '~/Dropbox (PfeiBer Lab)/Devaluation/Tasks/WTP/output';
+datapath = fullfile(dropboxDir, [study subjid], [study,'.',subjid,'.',ssnid,'.mat']);
+ptbpath = fullfile(dropboxDir, [study subjid], ['PTBParams.',subjid,'.',ssnid,'.mat']);
 
 if exist(datapath)
     load(datapath);
