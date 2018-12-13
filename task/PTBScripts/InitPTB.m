@@ -78,6 +78,17 @@ if isempty(inMRI)
     inMRI = 0;
 end
 
+% assign trigger
+if inMRI == 0
+    trigger = KbName('SPACE');
+else
+    trigger = 52;
+end
+
+%% Initialize keys 
+[internal_keyboard, response_keyboard] = getKeyboards;
+PTBParams.keys = initKeysFromId(response_keyboard, trigger);
+
 %% Initialize PsychToolbox parameters and save in PTBParams struct
 AssertOpenGL;
 ListenChar(2); % don't print keypresses to screen
@@ -100,6 +111,7 @@ black=BlackIndex(w);
 gray = (WhiteIndex(w) + BlackIndex(w))/2;
 ifi = Screen('GetFlipInterval', w);
 
+
 % Save parameters in PTBParams structure
 PTBParams.win = w;
 PTBParams.rect = rect;
@@ -112,7 +124,7 @@ PTBParams.datafile = datafile;
 PTBParams.homepath = homepath;
 PTBParams.subjid = subjid;
 PTBParams.ssnid = ssnid;
-PTBParams.keys = initKeys(inMRI);
+%PTBParams.keys = initKeys(inMRI);
 PTBParams.inMRI = inMRI;
 PTBParams.(char(runNum)).runid = runid;
 

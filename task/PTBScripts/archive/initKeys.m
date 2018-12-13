@@ -23,7 +23,7 @@ devices=PsychHID('Devices');
 if inMRI == 1
     for deviceCount=1:length(devices)
         % the lcni button box has the usageName 'Keyboard' and the product 'Xkeys'
-        if (strcmp(devices(deviceCount).usageName,'Keyboard') && strcmp(devices(deviceCount).product,'Xkeys'))
+        if (strcmp(devices(deviceCount).usageName,'Keyboard') && strcmp(devices(deviceCount).product,''))
             keys.bbox = deviceCount;
             keys.trigger = 52; % trigger pulse / TR signal key ('`') for LCNI scanner
             fprintf('button box detected\n using device #%d: %s\n',deviceCount,devices(deviceCount).product);
