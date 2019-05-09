@@ -14,7 +14,7 @@ addpath(fullfile(homepath,'PTBScripts'));
 %% Get subject and run info
 study = 'DEV'; %removed user input for convenience 
 subjid = input('Subject number (3 digits):  ', 's');
-ssnid = input('Session number (1-4):  ', 's');
+ssnid = input('Session number (1-5):  ', 's');
 inMRI = input('MRI session? 0 = no, 1 = yes: ');
 
 %% Initialize variables
