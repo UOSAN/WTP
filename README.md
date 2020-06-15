@@ -1,76 +1,50 @@
-## Willingness To Pay (WTP) task
+# Willingness To Pay (WTP) task
 
-Code and stimuli for the Willingness To Pay task used in the Devaluation study. 
+## Introduction
 
-Originally adapted from Hutcherson et al. (2012).
+The Willingness To Pay (WTP) task presents image stimuli of foods that are bid on, in $0.50 increments. At the end of the task, the participant is rewarded with either a food or the monetary difference in bid for a random food item. This task is used in the Devaluation study.
 
-## Key scripts
-**`runJitter.m`** 
-This script creates a vector with jitter times based on the number of trials per run. It is saved as `WTP/task/input/jitter.m`. The same jitter vector is used in each run. This script only needs to be run once (or until a desired vector is achieved) per study. User inputs include:
-- Number of trials in each run
+Originally adapted from [Hutcherson et al. (2012)](https://doi.org/10.1523/JNEUROSCI.6387-11.2012).
 
-**`runGetStimWTP.m`** 
-This script selects images based on subject ratings, randomizes the images within each health (healthy and unhealthy) and liking (liked and disliked) category, splits the images based on the number of runs, and populates the image run folders `foodpics/run1` etc. User inputs include:
-- Study name
-- Subject ID
-- Number of runs 
-- Total number of trials per condition (This number must be divisible by the number of runs)
-- Image ratings saved as a .csv file with the following format: `WTP/task/input/[StudyName SubjectID]_ratings.csv` e.g. `DEV999_ratings.csv`
+- Conditions: pictures of food, where the food is in one of four conditions healthy and liked, healthy and disliked, unhealthy and liked, or unhealthy and disliked.
+- Trial structure: Fixation cross (~5s in scanner, ~2s in behavioral), stimulus with text cue asking for a bid (4s), 1-4 rating (up to 2.5s) => 11.5 s/trial in scanner, 9.5 s/trial in behavioral.
+- Duration: 16 trials per run in scanner = 184s. 32 trials per run in behavioral = 272s
 
-**`runWTP.m`**
-This script runs the task. You can specify whether the task will be run in the MRI scanner or behaviorally. User inputs include:
-- Study name
-- Subject ID
-- Session Number (0 = practice; 1, unless a longitudinal study)
-- Session type (MRI or behavioral)
+## How to run the task
 
-**`runWTP_practice.m`** 
-This script runs the practice session. You can specify whether the task will be run in the MRI scanner or behaviorally. User inputs include:
-- Study name
-- Subject ID
-- Session Number (1, unless a longitudinal study)
-- Run Number (0 = practice)
-- Session type (MRI or behavioral)
+1. Launch the PsychoPy Builder.
+2. Open the file `WTP.psyexp`.
+3. Start the experiment by selecting the Tools -> Run menu item.
+4. Fill in the participant number, the session number, and the run number. Sessions 1 and 2 are in-scanner sessions, while sessions 3, 4, and 5 are behavioral sessions. The task will start automatically after that.
 
-**`runAuction.m`** 
-This script runs the food auction. You'll need to update the `selectfood.m` file with currently available food items. User inputs include:
-- Study name
-- Subject ID
-- Session Number (1, unless a longitudinal study)
-- Run Number (0 = practice)
-- Session type (MRI or behavioral)
+## Task description
 
-## Output
-Files are saved to the SubjectData directory. Files are nested in the following manner:
+The task starts by displaying instruction text. The instruction text is displayed until the user presses one of the response buttons, in the behavioral version, or the trigger signal is received from the MRI, in the scanner version. The instruction text for the behavioral version is:
 ```
-|-- SubjectData
-    |-- DEV999                   [StudyName SubjectID] 
-        |-- DEV.999.1.mat        [StudyName . SubjectID . Session.mat]
-        |-- PTBParams.999.1.mat   [PTBParams . SubjectID . Session.mat]
+The task is about to begin.
+Get ready!
 ```
-**PTBParams structure** stores psychtoolbox parameters
+In the scanner version it is:
+```
+Calibrating scanner.
+Please hold very still.
+```
 
-**Data structure** stores the following data:
+Trials are repeated 32 times, in the behavioral version, or 16 times, in the scanner version.
 
-- `subjid` = Subject ID
-- `ssnid` = Session ID (0 = practice)
-- `runid` = Run number
-- `time` = Date and time log
-- `StartTime` = Start time that all events are referenced from
-- `Jitter` = Cell array with fixation jitters for each trial
-- `TrialStart` = Start time for each trial
-- `ISI` = Fixation duration (Jitter + specified time)
-- `FoodOn` = Absolute time when food image was flipped
-- `BidOn` = Absolute time when bid was flipped
-- `FoodOnset` = Food onset (`FoodOn` - `StartTime`)
-- `BidOnset` = Food onset (`BidOn` - `StartTime`)
-- `FoodDuration` = Duration of food image
-- `BidDuration` = Duration of bid 
-- `FoodPic` = Food image file name
-- `FoodNum` = Food number from original list
-- `HealthCond` = Health condition (healthy or unhealthy)
-- `LikingCond` = Liking condition (liked or disliked)
-- `LikingRating` = Liking rating (collected prior to running the task)
-- `Resp` = Bid response
-- `RT` = Bid reaction time
-- `EndTime` = End time
+After all the trials are completed, end text is displayed for 4 seconds. The end text is:
+```
+The task is now complete.
+```
+
+### Trial structure
+
+1. Display a white fixation cross on a black background for ~2s in the behavioral version or for ~5s in the scanner version. The cross is 48 pixels square.
+2. Display image stimulus for 4s.
+3. Add a cue of white text on black background centered above the image to the screen. The text is `How much would you pay to eat this food?`. Also display 4 squares evenly spaced in a row, from left to right, centered below the image, containing the text "1", "2", "3", "4" in black on a grey background. Above each box is a label "$0", "$.50", "$1", "$1.50" in white text indicating the value. Display for up to 2.5s, or until the participant responds.
+
+## Configuration
+Configuration occurs automatically on the first run of each session. The image ratings from the ImageSelection task are used to determine the conditions of healthy liked, healthy disliked, unhealthy liked, and unhealthy disliked foods, then conditions files, listing which images will be shown in order, are created.
+
+## Developer documentation
+Created using Developed with PsychoPy v2020.1.2
