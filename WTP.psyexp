@@ -1,0 +1,331 @@
+﻿<?xml version="1.0" ?>
+<PsychoPy2experiment encoding="utf-8" version="2020.1.2">
+  <Settings>
+    <Param name="Audio latency priority" updates="None" val="use prefs" valType="str"/>
+    <Param name="Audio lib" updates="None" val="use prefs" valType="str"/>
+    <Param name="Completed URL" updates="None" val="" valType="str"/>
+    <Param name="Data filename" updates="None" val="''" valType="code"/>
+    <Param name="Enable Escape" updates="None" val="True" valType="bool"/>
+    <Param name="Experiment info" updates="None" val="{'participant': '', 'session': '1', 'run_number': ''}" valType="code"/>
+    <Param name="Force stereo" updates="None" val="True" valType="bool"/>
+    <Param name="Full-screen window" updates="None" val="False" valType="bool"/>
+    <Param name="HTML path" updates="None" val="html" valType="str"/>
+    <Param name="Incomplete URL" updates="None" val="" valType="str"/>
+    <Param name="Monitor" updates="None" val="testMonitor" valType="str"/>
+    <Param name="Save csv file" updates="None" val="False" valType="bool"/>
+    <Param name="Save excel file" updates="None" val="False" valType="bool"/>
+    <Param name="Save log file" updates="None" val="True" valType="bool"/>
+    <Param name="Save psydat file" updates="None" val="True" valType="bool"/>
+    <Param name="Save wide csv file" updates="None" val="True" valType="bool"/>
+    <Param name="Screen" updates="None" val="1" valType="num"/>
+    <Param name="Show info dlg" updates="None" val="True" valType="bool"/>
+    <Param name="Show mouse" updates="None" val="False" valType="bool"/>
+    <Param name="Units" updates="None" val="height" valType="str"/>
+    <Param name="Use version" updates="None" val="" valType="str"/>
+    <Param name="Window size (pixels)" updates="None" val="[1280, 720]" valType="code"/>
+    <Param name="blendMode" updates="None" val="avg" valType="str"/>
+    <Param name="color" updates="None" val="$[-1, -1, -1]" valType="str"/>
+    <Param name="colorSpace" updates="None" val="rgb" valType="str"/>
+    <Param name="expName" updates="None" val="DEV" valType="str"/>
+    <Param name="exportHTML" updates="None" val="on Sync" valType="str"/>
+    <Param name="logging level" updates="None" val="exp" valType="code"/>
+  </Settings>
+  <Routines>
+    <Routine name="trial">
+      <PolygonComponent name="fixation">
+        <Param name="disabled" updates="None" val="False" valType="bool"/>
+        <Param name="durationEstim" updates="None" val="2" valType="code"/>
+        <Param name="fillColor" updates="constant" val="$[1,1,1]" valType="str"/>
+        <Param name="fillColorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="interpolate" updates="constant" val="linear" valType="str"/>
+        <Param name="lineColor" updates="constant" val="$[1,1,1]" valType="str"/>
+        <Param name="lineColorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="lineWidth" updates="constant" val="1" valType="code"/>
+        <Param name="nVertices" updates="constant" val="4" valType="int"/>
+        <Param name="name" updates="None" val="fixation" valType="code"/>
+        <Param name="opacity" updates="constant" val="1" valType="code"/>
+        <Param name="ori" updates="constant" val="0" valType="code"/>
+        <Param name="pos" updates="constant" val="(0, 0)" valType="code"/>
+        <Param name="saveStartStop" updates="None" val="True" valType="bool"/>
+        <Param name="shape" updates="constant" val="cross" valType="str"/>
+        <Param name="size" updates="constant" val="(48, 48)" valType="code"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="0.0" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="stopVal" updates="constant" val="$jitter_duration" valType="code"/>
+        <Param name="syncScreenRefresh" updates="None" val="True" valType="bool"/>
+        <Param name="units" updates="None" val="pix" valType="str"/>
+      </PolygonComponent>
+      <ImageComponent name="stimulus_image">
+        <Param name="color" updates="constant" val="$[1,1,1]" valType="str"/>
+        <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="disabled" updates="None" val="False" valType="bool"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
+        <Param name="flipVert" updates="constant" val="False" valType="bool"/>
+        <Param name="image" updates="set every repeat" val="$image_file" valType="str"/>
+        <Param name="interpolate" updates="constant" val="linear" valType="str"/>
+        <Param name="mask" updates="constant" val="None" valType="str"/>
+        <Param name="name" updates="None" val="stimulus_image" valType="code"/>
+        <Param name="opacity" updates="constant" val="1" valType="code"/>
+        <Param name="ori" updates="constant" val="0" valType="code"/>
+        <Param name="pos" updates="constant" val="(0, 0)" valType="code"/>
+        <Param name="saveStartStop" updates="None" val="True" valType="bool"/>
+        <Param name="size" updates="constant" val="(0.5, 0.5)" valType="code"/>
+        <Param name="startEstim" updates="None" val="2" valType="code"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="$jitter_duration" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="stopVal" updates="constant" val="6.5" valType="code"/>
+        <Param name="syncScreenRefresh" updates="None" val="True" valType="bool"/>
+        <Param name="texture resolution" updates="constant" val="128" valType="code"/>
+        <Param name="units" updates="None" val="from exp settings" valType="str"/>
+      </ImageComponent>
+      <TextComponent name="bid_cue">
+        <Param name="color" updates="constant" val="white" valType="str"/>
+        <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="disabled" updates="None" val="False" valType="bool"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="flip" updates="constant" val="" valType="str"/>
+        <Param name="font" updates="constant" val="Arial" valType="str"/>
+        <Param name="languageStyle" updates="None" val="LTR" valType="str"/>
+        <Param name="letterHeight" updates="constant" val="0.05" valType="code"/>
+        <Param name="name" updates="None" val="bid_cue" valType="code"/>
+        <Param name="opacity" updates="constant" val="1" valType="code"/>
+        <Param name="ori" updates="constant" val="0" valType="code"/>
+        <Param name="pos" updates="constant" val="(0, 0.4)" valType="code"/>
+        <Param name="saveStartStop" updates="None" val="True" valType="bool"/>
+        <Param name="startEstim" updates="None" val="6" valType="code"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="$jitter_duration + 4" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="stopVal" updates="constant" val="2.5" valType="code"/>
+        <Param name="syncScreenRefresh" updates="None" val="True" valType="bool"/>
+        <Param name="text" updates="constant" val="How much would you pay to eat this food?" valType="str"/>
+        <Param name="units" updates="None" val="from exp settings" valType="str"/>
+        <Param name="wrapWidth" updates="constant" val="" valType="code"/>
+      </TextComponent>
+      <ImageComponent name="bid_key_image">
+        <Param name="color" updates="constant" val="$[1,1,1]" valType="str"/>
+        <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="disabled" updates="None" val="False" valType="bool"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
+        <Param name="flipVert" updates="constant" val="False" valType="bool"/>
+        <Param name="image" updates="constant" val="task/BidKeys.bmp" valType="str"/>
+        <Param name="interpolate" updates="constant" val="linear" valType="str"/>
+        <Param name="mask" updates="constant" val="None" valType="str"/>
+        <Param name="name" updates="None" val="bid_key_image" valType="code"/>
+        <Param name="opacity" updates="constant" val="1" valType="code"/>
+        <Param name="ori" updates="constant" val="0" valType="code"/>
+        <Param name="pos" updates="constant" val="(0, -0.4)" valType="code"/>
+        <Param name="saveStartStop" updates="None" val="True" valType="bool"/>
+        <Param name="size" updates="constant" val="" valType="code"/>
+        <Param name="startEstim" updates="None" val="6" valType="code"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="$jitter_duration + 4" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="stopVal" updates="constant" val="2.5" valType="code"/>
+        <Param name="syncScreenRefresh" updates="None" val="True" valType="bool"/>
+        <Param name="texture resolution" updates="constant" val="128" valType="code"/>
+        <Param name="units" updates="None" val="from exp settings" valType="str"/>
+      </ImageComponent>
+      <KeyboardComponent name="response">
+        <Param name="allowedKeys" updates="constant" val="'1', '2', '3', '4'" valType="code"/>
+        <Param name="correctAns" updates="constant" val="" valType="str"/>
+        <Param name="disabled" updates="None" val="False" valType="bool"/>
+        <Param name="discard previous" updates="constant" val="True" valType="bool"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="forceEndRoutine" updates="constant" val="True" valType="bool"/>
+        <Param name="name" updates="None" val="response" valType="code"/>
+        <Param name="saveStartStop" updates="None" val="True" valType="bool"/>
+        <Param name="startEstim" updates="None" val="6" valType="code"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="$jitter_duration + 4" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="stopVal" updates="constant" val="2.5" valType="code"/>
+        <Param name="store" updates="constant" val="last key" valType="str"/>
+        <Param name="storeCorrect" updates="constant" val="False" valType="bool"/>
+        <Param name="syncScreenRefresh" updates="constant" val="True" valType="bool"/>
+      </KeyboardComponent>
+    </Routine>
+    <Routine name="instructions">
+      <CodeComponent name="set_start_text">
+        <Param name="Begin Experiment" updates="constant" val="#&amp;#10;# Determine the input conditions file based on the session number.&amp;#10;# Session numbers 1 and 2 are behavioral, not in the scanner.&amp;#10;# Session numbers 3, 4, and 5 are performed in the MRI scanner.&amp;#10;# Display different start text / instructions for behavioral sessions compared with MRI scan sessions.&amp;#10;session = expInfo['session']&amp;#10;if is_mri_session(session):&amp;#10;    start_text_str = 'Calibrating scanner.\nPlease hold very still.'&amp;#10;else:&amp;#10;    start_text_str = 'The task is about to begin.\nGet ready!'&amp;#10;conditions_file = f'DEV{participant}_{run_number}_conditions.csv'" valType="extendedCode"/>
+        <Param name="Begin JS Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Begin JS Routine" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Begin Routine" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Code Type" updates="None" val="Py" valType="str"/>
+        <Param name="Each Frame" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Each JS Frame" updates="constant" val="" valType="extendedCode"/>
+        <Param name="End Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="End JS Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="End JS Routine" updates="constant" val="" valType="extendedCode"/>
+        <Param name="End Routine" updates="constant" val="" valType="extendedCode"/>
+        <Param name="disabled" updates="None" val="False" valType="bool"/>
+        <Param name="name" updates="None" val="set_start_text" valType="code"/>
+      </CodeComponent>
+      <TextComponent name="start_text">
+        <Param name="color" updates="constant" val="white" valType="str"/>
+        <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="disabled" updates="None" val="False" valType="bool"/>
+        <Param name="durationEstim" updates="None" val="3" valType="code"/>
+        <Param name="flip" updates="constant" val="" valType="str"/>
+        <Param name="font" updates="constant" val="Arial" valType="str"/>
+        <Param name="languageStyle" updates="None" val="LTR" valType="str"/>
+        <Param name="letterHeight" updates="constant" val="0.075" valType="code"/>
+        <Param name="name" updates="None" val="start_text" valType="code"/>
+        <Param name="opacity" updates="constant" val="1" valType="code"/>
+        <Param name="ori" updates="constant" val="0" valType="code"/>
+        <Param name="pos" updates="constant" val="(0, 0)" valType="code"/>
+        <Param name="saveStartStop" updates="None" val="False" valType="bool"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="0.0" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="syncScreenRefresh" updates="None" val="True" valType="bool"/>
+        <Param name="text" updates="set every repeat" val="$start_text_str" valType="str"/>
+        <Param name="units" updates="None" val="from exp settings" valType="str"/>
+        <Param name="wrapWidth" updates="constant" val="" valType="code"/>
+      </TextComponent>
+      <KeyboardComponent name="start_trigger">
+        <Param name="allowedKeys" updates="constant" val="'1', '2', '3', '4', 'apostrophe'" valType="code"/>
+        <Param name="correctAns" updates="constant" val="" valType="str"/>
+        <Param name="disabled" updates="None" val="False" valType="bool"/>
+        <Param name="discard previous" updates="constant" val="True" valType="bool"/>
+        <Param name="durationEstim" updates="None" val="3" valType="code"/>
+        <Param name="forceEndRoutine" updates="constant" val="True" valType="bool"/>
+        <Param name="name" updates="None" val="start_trigger" valType="code"/>
+        <Param name="saveStartStop" updates="None" val="False" valType="bool"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="0.0" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="store" updates="constant" val="nothing" valType="str"/>
+        <Param name="storeCorrect" updates="constant" val="False" valType="bool"/>
+        <Param name="syncScreenRefresh" updates="constant" val="True" valType="bool"/>
+      </KeyboardComponent>
+    </Routine>
+    <Routine name="end">
+      <TextComponent name="end_text">
+        <Param name="color" updates="constant" val="white" valType="str"/>
+        <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="disabled" updates="None" val="False" valType="bool"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="flip" updates="constant" val="" valType="str"/>
+        <Param name="font" updates="constant" val="Arial" valType="str"/>
+        <Param name="languageStyle" updates="None" val="LTR" valType="str"/>
+        <Param name="letterHeight" updates="constant" val="0.075" valType="code"/>
+        <Param name="name" updates="None" val="end_text" valType="code"/>
+        <Param name="opacity" updates="constant" val="1" valType="code"/>
+        <Param name="ori" updates="constant" val="0" valType="code"/>
+        <Param name="pos" updates="constant" val="(0, 0)" valType="code"/>
+        <Param name="saveStartStop" updates="None" val="False" valType="bool"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="0.0" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="stopVal" updates="constant" val="4.0" valType="code"/>
+        <Param name="syncScreenRefresh" updates="None" val="True" valType="bool"/>
+        <Param name="text" updates="constant" val="The task is now complete." valType="str"/>
+        <Param name="units" updates="None" val="from exp settings" valType="str"/>
+        <Param name="wrapWidth" updates="constant" val="" valType="code"/>
+      </TextComponent>
+    </Routine>
+    <Routine name="auction">
+      <CodeComponent name="auction_code">
+        <Param name="Begin Experiment" updates="constant" val="auction_results = ''" valType="extendedCode"/>
+        <Param name="Begin JS Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Begin JS Routine" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Begin Routine" updates="constant" val="#&amp;#10;# Custom code to run auction at end of WTP task. At end of session,&amp;#10;# randomly select a food, randomly determine a bid,&amp;#10;# then compare with participant's bid. If the participant's bid is&amp;#10;# higher, then they get the food and the difference between their bid and the maximum.&amp;#10;participant = expInfo['participant']&amp;#10;session = expInfo['session']&amp;#10;run_number = expInfo['run_number']&amp;#10;if ((session == '1' or session == '2') and run_number == '4') or ((session == '3' or session == '4' or session == '5') and run_number == '2'):&amp;#10;    from numpy.random import choice&amp;#10;    from psychopy.misc import fromFile&amp;#10;&amp;#10;    available_food = ['Almonds.bmp'&amp;#10;                      'Cashews.bmp',&amp;#10;                      'ClifBar1.bmp',&amp;#10;                      'ClifBar2.bmp',&amp;#10;                      'FruitLeather.bmp',&amp;#10;                      'Peanuts.bmp',&amp;#10;                      'BarbequeChips.bmp',&amp;#10;                      'Cheetos.bmp',&amp;#10;                      'CoolRanchDoritos.bmp',&amp;#10;                      'Doritos.bmp',&amp;#10;                      'Fritos.bmp',&amp;#10;                      'Oreos.bmp',&amp;#10;                      'PotatoChips.bmp',&amp;#10;                      'RiceKrispiesTreat.bmp',&amp;#10;                      'SourCreamChips.bmp']&amp;#10;    # Get computer generated bid&amp;#10;    bid = choice([1, 2, 3, 4])&amp;#10;    bid_as_currency = ['blank', '$0.00', '$0.50', '$1.00', '$1.50']&amp;#10;    if is_mri_session(session):&amp;#10;        bid = 1&amp;#10;&amp;#10;    # Get all the foods bid on, by this participant, then create the intersection&amp;#10;    # with the foods that are available, then randomly select a food from the intersection&amp;#10;    image_bid_dict = {}&amp;#10;    for image, bid_key in zip(trials.trialList, trials.data['response.keys']):&amp;#10;        if bid_key is None:&amp;#10;            bid_key = 0&amp;#10;        image_bid_dict[os.path.basename(image)] = int(bid_key)&amp;#10;&amp;#10;    if is_mri_session(session):&amp;#10;        runs = ['1', '2', '3']&amp;#10;    else:&amp;#10;        runs = ['1']&amp;#10;    for run in runs:&amp;#10;        file_name = 'DEV' + participant + '.' + session + '.' + run + '.psydat'&amp;#10;        data_file = fromFile(os.path.join(output_dir, file_name))&amp;#10;        for trial_number, condition in enumerate(data_file.loops[0].trialList):&amp;#10;            image = condition['image_file']&amp;#10;            bid_key = data_file.entries[trial_number]['response.keys']&amp;#10;            image_bid_dict[os.path.basename(image)] = int(bid_key)&amp;#10;    intersect = set(image_bid_dict.keys()) &amp; set(available_food)&amp;#10;    food = choice(list(intersect))&amp;#10;    participant_bid = int(image_bid_dict[food])&amp;#10;&amp;#10;    # If the participant bid still can't be found, in the current run or previous runs,&amp;#10;    # use 1 to indicate the lowest possible bid.&amp;#10;    if participant_bid is None:&amp;#10;        participant_bid = 1&amp;#10;&amp;#10;    if participant_bid &gt;= bid:&amp;#10;        match_text = 'Match. You will receive this snack.'&amp;#10;    else:&amp;#10;        match_text = 'No match. You will not receive this snack.'&amp;#10;&amp;#10;    auction_results = f'---------------\n' \&amp;#10;                      f'Auction results\n' \&amp;#10;                      f'---------------\n' \&amp;#10;                      f'Food selected: {food}\n' \&amp;#10;                      f'Participant bid: {bid_as_currency[participant_bid]}\n' \&amp;#10;                      f'Random bid: {bid_as_currency[bid]}\n\n' \&amp;#10;                      f'{match_text}\n' \&amp;#10;                      f'Money left: ' + bid_as_currency[(4 - participant_bid) + 1]&amp;#10;    print(auction_results)&amp;#10;else:&amp;#10;    continueRoutine = False&amp;#10;&amp;#10;" valType="extendedCode"/>
+        <Param name="Code Type" updates="None" val="Py" valType="str"/>
+        <Param name="Each Frame" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Each JS Frame" updates="constant" val="" valType="extendedCode"/>
+        <Param name="End Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="End JS Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="End JS Routine" updates="constant" val="" valType="extendedCode"/>
+        <Param name="End Routine" updates="constant" val="" valType="extendedCode"/>
+        <Param name="disabled" updates="None" val="False" valType="bool"/>
+        <Param name="name" updates="None" val="auction_code" valType="code"/>
+      </CodeComponent>
+      <TextComponent name="auction_text">
+        <Param name="color" updates="constant" val="white" valType="str"/>
+        <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="disabled" updates="None" val="False" valType="bool"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="flip" updates="constant" val="" valType="str"/>
+        <Param name="font" updates="constant" val="Arial" valType="str"/>
+        <Param name="languageStyle" updates="None" val="LTR" valType="str"/>
+        <Param name="letterHeight" updates="constant" val="0.05" valType="code"/>
+        <Param name="name" updates="None" val="auction_text" valType="code"/>
+        <Param name="opacity" updates="constant" val="1" valType="code"/>
+        <Param name="ori" updates="constant" val="0" valType="code"/>
+        <Param name="pos" updates="constant" val="(0, 0)" valType="code"/>
+        <Param name="saveStartStop" updates="None" val="False" valType="bool"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="0.0" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="stopVal" updates="constant" val="10.0" valType="code"/>
+        <Param name="syncScreenRefresh" updates="None" val="True" valType="bool"/>
+        <Param name="text" updates="set every repeat" val="$auction_results" valType="str"/>
+        <Param name="units" updates="None" val="from exp settings" valType="str"/>
+        <Param name="wrapWidth" updates="constant" val="" valType="code"/>
+      </TextComponent>
+    </Routine>
+    <Routine name="setup">
+      <CodeComponent name="set_output_file">
+        <Param name="Begin Experiment" updates="constant" val="output_dir = os.path.join(os.path.expanduser('~'), 'Dropbox (PfeiBer Lab)', 'Devaluation', 'Tasks', 'WTP', 'output', expName + expInfo['participant'])&amp;#10;# Create output filename like: DEV123.3.4.csv&amp;#10;output_filename = expName + expInfo['participant'] + '.' + expInfo['session'] + '.' + expInfo['run_number']&amp;#10;thisExp.dataFileName = os.path.join(output_dir, output_filename)&amp;#10;filename = os.path.join(output_dir, output_filename)&amp;#10;logging.LogFile(filename + '.log', level=logging.EXP)" valType="extendedCode"/>
+        <Param name="Begin JS Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Begin JS Routine" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Begin Routine" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Code Type" updates="None" val="Py" valType="str"/>
+        <Param name="Each Frame" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Each JS Frame" updates="constant" val="" valType="extendedCode"/>
+        <Param name="End Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="End JS Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="End JS Routine" updates="constant" val="" valType="extendedCode"/>
+        <Param name="End Routine" updates="constant" val="" valType="extendedCode"/>
+        <Param name="disabled" updates="None" val="False" valType="bool"/>
+        <Param name="name" updates="None" val="set_output_file" valType="code"/>
+      </CodeComponent>
+      <CodeComponent name="create_conditions_files">
+        <Param name="Begin Experiment" updates="constant" val="import os&amp;#10;from operator import itemgetter&amp;#10;from numpy.random import shuffle&amp;#10;&amp;#10;&amp;#10;def is_mri_session(session: str) -&gt; bool:&amp;#10;    return session == '1' or session == '2'&amp;#10;&amp;#10;&amp;#10;def get_trial_order(session: str, c1, c2, c3, c4):&amp;#10;    # c1 corresponds to unhealthy_liked condition&amp;#10;    # c2 corresponds to healthy_liked&amp;#10;    # c3 corresponds to unhealthy_disliked&amp;#10;    # c4 corresponds to healthy_disliked&amp;#10;    if is_mri_session(session):&amp;#10;        return [c1[0], c2[0], c2[1],&amp;#10;        c3[0], c1[1], c4[0],&amp;#10;        c1[2], c3[1], c2[2],&amp;#10;        c4[1], c3[2], c3[3],&amp;#10;        c4[2], c4[3], c2[3], c1[3]]&amp;#10;    else:&amp;#10;        return [c1[0], c2[0], c2[1],&amp;#10;        c3[0], c1[1], c4[0],&amp;#10;        c1[2], c3[1], c2[2],&amp;#10;        c4[1], c3[2], c3[3],&amp;#10;        c4[2], c4[3], c2[3], c1[3],&amp;#10;        c1[4], c2[4], c2[5],&amp;#10;        c3[4], c1[5], c4[4],&amp;#10;        c1[6], c3[5], c2[6],&amp;#10;        c4[5], c3[6], c3[7],&amp;#10;        c4[6], c4[7], c2[7], c1[7]]&amp;#10;&amp;#10;&amp;#10;def get_jitter(session: str, size: int):&amp;#10;    if is_mri_session(session):&amp;#10;        return [3,&amp;#10;                3,&amp;#10;                1.78028293099451,&amp;#10;                0.0951171473581233,&amp;#10;                2.68096584793926,&amp;#10;                0.319097227741995,&amp;#10;                1.83219376832774,&amp;#10;                2.08366133639649,&amp;#10;                1.58406048619078,&amp;#10;                0.800571063726905,&amp;#10;                0.665878598015893,&amp;#10;                0.925946125518181,&amp;#10;                0.670864756249938,&amp;#10;                0.859947179153415,&amp;#10;                0.333112567100657,&amp;#10;                1.42165177522370]&amp;#10;    else:&amp;#10;        return [1.0] * size&amp;#10;&amp;#10;&amp;#10;participant = expInfo['participant']&amp;#10;session = expInfo['session']&amp;#10;run_number = expInfo['run_number']&amp;#10;# There are always 4 conditions: healthy_liked, unhealthy_liked, healthy_disliked, and unhealthy_disliked&amp;#10;# In MRI sessions, display 4 images from each condition. In behavioral sessions,&amp;#10;# display 8 images from each condition.&amp;#10;num_conditions = 4&amp;#10;if is_mri_session(session):&amp;#10;    num_images = 4&amp;#10;    num_runs = 4&amp;#10;else:&amp;#10;    num_images = 8&amp;#10;    num_runs = 2&amp;#10;&amp;#10;# Create input files, for all runs, based on ImageSelection task output only in run 1.&amp;#10;if run_number == '1':&amp;#10;    image_selection_output = os.path.join(os.path.expanduser('~'), 'Dropbox (PfeiBer Lab)', 'Devaluation', 'Tasks', 'ImageSelection', 'output', 'WTP', 'DEV' + participant + '_ratings.csv')&amp;#10;    image_selection = []&amp;#10;    with open(image_selection_output) as f:&amp;#10;        for line in f:&amp;#10;            image_selection.append(line.strip().split(','))&amp;#10;&amp;#10;    # image_selection output is a CSV file with three fields: rating, healthy or unhealthy, image file name&amp;#10;    # Sort by healthy v. unhealthy, then sort by ratings.&amp;#10;    image_selection.sort(key=itemgetter(1, 0))&amp;#10;    for i, r in enumerate(image_selection):&amp;#10;        if r[1] == '1':&amp;#10;            unhealthy = [os.path.join('task', 'foodpics', 'unhealthy', rr[2]) for rr in image_selection[:i]]&amp;#10;            healthy = [os.path.join('task', 'foodpics', 'healthy', rr[2]) for rr in image_selection[i:]]&amp;#10;            break&amp;#10;&amp;#10;    for i in range(num_runs):&amp;#10;        unhealthy_liked = unhealthy[-num_images:]&amp;#10;        shuffle(unhealthy_liked)&amp;#10;        unhealthy_disliked = unhealthy[:num_images]&amp;#10;        shuffle(unhealthy_disliked)&amp;#10;        unhealthy = unhealthy[num_images:-num_images]&amp;#10;        healthy_liked = healthy[-num_images:]&amp;#10;        shuffle(healthy_liked)&amp;#10;        healthy_disliked = healthy[:num_images]&amp;#10;        shuffle(healthy_disliked)&amp;#10;        healthy = healthy[num_images:-num_images]&amp;#10;&amp;#10;        trial_order = get_trial_order(session, unhealthy_liked, healthy_liked, unhealthy_disliked, healthy_disliked)&amp;#10;        jitter = get_jitter(session, num_conditions * num_images)&amp;#10;&amp;#10;        condition_file = f'DEV{participant}_{i+1}_conditions.csv'&amp;#10;        with open(condition_file, mode='w') as f:&amp;#10;            f.write('image_file,jitter_duration\n')&amp;#10;            for c, j in zip(trial_order, jitter):&amp;#10;                f.write(f'{c},{j}\n')&amp;#10;" valType="extendedCode"/>
+        <Param name="Begin JS Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Begin JS Routine" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Begin Routine" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Code Type" updates="None" val="Py" valType="str"/>
+        <Param name="Each Frame" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Each JS Frame" updates="constant" val="" valType="extendedCode"/>
+        <Param name="End Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="End JS Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="End JS Routine" updates="constant" val="" valType="extendedCode"/>
+        <Param name="End Routine" updates="constant" val="" valType="extendedCode"/>
+        <Param name="disabled" updates="None" val="False" valType="bool"/>
+        <Param name="name" updates="None" val="create_conditions_files" valType="code"/>
+      </CodeComponent>
+    </Routine>
+  </Routines>
+  <Flow>
+    <Routine name="setup"/>
+    <Routine name="instructions"/>
+    <LoopInitiator loopType="TrialHandler" name="trials">
+      <Param name="Selected rows" updates="None" val="" valType="str"/>
+      <Param name="conditions" updates="None" val="None" valType="str"/>
+      <Param name="conditionsFile" updates="None" val="$conditions_file" valType="str"/>
+      <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
+      <Param name="isTrials" updates="None" val="True" valType="bool"/>
+      <Param name="loopType" updates="None" val="sequential" valType="str"/>
+      <Param name="nReps" updates="None" val="1" valType="code"/>
+      <Param name="name" updates="None" val="trials" valType="code"/>
+      <Param name="random seed" updates="None" val="" valType="code"/>
+    </LoopInitiator>
+    <Routine name="trial"/>
+    <LoopTerminator name="trials"/>
+    <Routine name="auction"/>
+    <Routine name="end"/>
+  </Flow>
+</PsychoPy2experiment>
