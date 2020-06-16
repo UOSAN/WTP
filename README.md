@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The Willingness To Pay (WTP) task presents image stimuli of foods that are bid on, in $0.50 increments. At the end of the task, the participant is rewarded with either a food or the monetary difference in bid for a random food item. This task is used in the Devaluation study.
+The Willingness To Pay (WTP) task presents image stimuli of foods that are bid on, in $0.50 increments. At the end of the task, the participant can be rewarded with a food item and the monetary difference in bid for a random food item. This task is used in the Devaluation study.
 
 Originally adapted from [Hutcherson et al. (2012)](https://doi.org/10.1523/JNEUROSCI.6387-11.2012).
 
@@ -15,7 +15,7 @@ Originally adapted from [Hutcherson et al. (2012)](https://doi.org/10.1523/JNEUR
 1. Launch the PsychoPy Builder.
 2. Open the file `WTP.psyexp`.
 3. Start the experiment by selecting the Tools -> Run menu item.
-4. Fill in the participant number, the session number, and the run number. Sessions 1 and 2 are in-scanner sessions, while sessions 3, 4, and 5 are behavioral sessions. The task will start automatically after that.
+4. Fill in the participant number, the session number, and the run number. Sessions 1 and 2 are in-scanner sessions, while sessions 3, 4, and 5 are behavioral sessions. A practice run can be started by setting run_number to 0. The task will start automatically after that.
 
 ## Task description
 
@@ -36,6 +36,8 @@ After all the trials are completed, end text is displayed for 4 seconds. The end
 ```
 The task is now complete.
 ```
+
+At the end of the last run of a session, the participant can be rewarded with a randomly selected food item that they bid on and the monetary difference between the bid and the maximum possible bid.
 
 ### Trial structure
 
