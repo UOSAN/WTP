@@ -2,3 +2,5 @@ task/subjectdata/.DS_Store
 .DS_Store
 task/foodpics/run*/*.bmp
 task/SubjectData/*
+html/lib/
+
