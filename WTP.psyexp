@@ -152,11 +152,11 @@
     </Routine>
     <Routine name="instructions">
       <CodeComponent name="set_start_text">
-        <Param name="Begin Experiment" updates="constant" val="#&amp;#10;# Determine the input conditions file based on the session number.&amp;#10;# Session numbers 1 and 2 are behavioral, not in the scanner.&amp;#10;# Session numbers 3, 4, and 5 are performed in the MRI scanner.&amp;#10;# Display different start text / instructions for behavioral sessions compared with MRI scan sessions.&amp;#10;session = expInfo['session']&amp;#10;if is_mri_session(session):&amp;#10;    start_text_str = 'Calibrating scanner.\nPlease hold very still.'&amp;#10;else:&amp;#10;    start_text_str = 'The task is about to begin.\nGet ready!'&amp;#10;conditions_file = f'DEV{participant}_{run_number}_conditions.csv'" valType="extendedCode"/>
-        <Param name="Begin JS Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Begin Experiment" updates="constant" val="#&amp;#10;# Determine the input conditions file based on the session number.&amp;#10;# Session numbers 1 and 2 are behavioral, not in the scanner.&amp;#10;# Session numbers 3, 4, and 5 are performed in the MRI scanner.&amp;#10;# Display different start text / instructions for behavioral sessions compared with MRI scan sessions.&amp;#10;session = expInfo['session']&amp;#10;if is_mri_session(session):&amp;#10;    start_text_str = 'Calibrating scanner.\nPlease hold very still.'&amp;#10;else:&amp;#10;    start_text_str = 'The task is about to begin.\nGet ready!'&amp;#10;conditions_file = 'DEV' + participant + '_' + run_number + '_conditions.csv'" valType="extendedCode"/>
+        <Param name="Begin JS Experiment" updates="constant" val="session = expInfo[&quot;session&quot;];&amp;#10;if (is_mri_session(session)) {&amp;#10;    start_text_str = &quot;Calibrating scanner.\nPlease hold very still.&quot;;&amp;#10;} else {&amp;#10;    start_text_str = &quot;The task is about to begin.\nGet ready!&quot;;&amp;#10;}&amp;#10;conditions_file = ((((&quot;DEV&quot; + participant) + &quot;_&quot;) + run_number) + &quot;_conditions.csv&quot;);&amp;#10;" valType="extendedCode"/>
         <Param name="Begin JS Routine" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin Routine" updates="constant" val="" valType="extendedCode"/>
-        <Param name="Code Type" updates="None" val="Py" valType="str"/>
+        <Param name="Code Type" updates="None" val="Auto-&gt;JS" valType="str"/>
         <Param name="Each Frame" updates="constant" val="" valType="extendedCode"/>
         <Param name="Each JS Frame" updates="constant" val="" valType="extendedCode"/>
         <Param name="End Experiment" updates="constant" val="" valType="extendedCode"/>
@@ -282,7 +282,7 @@
         <Param name="Begin JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin JS Routine" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin Routine" updates="constant" val="" valType="extendedCode"/>
-        <Param name="Code Type" updates="None" val="Py" valType="str"/>
+        <Param name="Code Type" updates="None" val="Auto-&gt;JS" valType="str"/>
         <Param name="Each Frame" updates="constant" val="" valType="extendedCode"/>
         <Param name="Each JS Frame" updates="constant" val="" valType="extendedCode"/>
         <Param name="End Experiment" updates="constant" val="" valType="extendedCode"/>
