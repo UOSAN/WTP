@@ -219,6 +219,10 @@ function experimentInit() {
   }
   conditions_file = (((("DEV" + participant) + "_") + run_number) + "_conditions.csv");
   
+  psychoJS.downloadResources([
+    {name: conditions_file, path: './' + conditions_file}
+  ]);
+  
   start_text = new visual.TextStim({
     win: psychoJS.window,
     name: 'start_text',

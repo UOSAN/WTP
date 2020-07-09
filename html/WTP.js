@@ -226,7 +226,11 @@ function experimentInit() {
       start_text_str = "The task is about to begin.\nGet ready!";
   }
   conditions_file = (((("DEV" + participant) + "_") + run_number) + "_conditions.csv");
-  
+
+  psychoJS.downloadResources([
+    {name: conditions_file, path: './' + conditions_file}
+  ]);
+
   start_text = new visual.TextStim({
     win: psychoJS.window,
     name: 'start_text',
