@@ -44,4 +44,4 @@ At the end of the last run of a session, the participant can be rewarded with a 
 3. Add a cue of white text on black background centered above the image to the screen. The text is `How much would you pay to eat this food?`. Also display 4 squares evenly spaced in a row, from left to right, centered below the image, containing the text "1", "2", "3", "4" in black on a grey background. Above each box is a label "$0", "$.50", "$1", "$1.50" in white text indicating the value. Display for up to 2.5s, or until the participant responds.
 
 ## Developer documentation
-Created using Developed with PsychoPy v2020.1.2
+Created using PsychoPy v2020.1.2
