@@ -12,10 +12,8 @@ Originally adapted from [Hutcherson et al. (2012)](https://doi.org/10.1523/JNEUR
 
 ## How to run the task
 
-1. Launch the PsychoPy Builder.
-2. Open the file `WTP.psyexp`.
-3. Start the experiment by selecting the Tools -> Run menu item.
-4. Fill in the participant number, the session number, and the run number. Sessions 1 and 2 are in-scanner sessions, while sessions 3, 4, and 5 are behavioral sessions. A practice run can be started by setting run_number to 0. The task will start automatically after that.
+1. When this task is run online, via pavlovia.org, make sure that a participant-specific conditions files, containing the names of images to be displayed in order, have been created in the `html/` folder. The conditions files are named `DEV999_1_conditions.csv` for participant 999 for run 1. This can be done by starting the Python version of the task and moving the created conditions files. Then, these changes have to be pushed to gitlab.pavlovia.org. 
+2. Create the experiment URL with a query string that specifies the participant number, the session number, and the run number. For example, for participant 888, in session 3, performing run number 1, the URL must include `participant=888&session=3&run_number=1`. After this URL is accessed, the images will be downloaded to the participant's computer, then the task will start automatically.
 
 ## Task description
 
@@ -44,9 +42,6 @@ At the end of the last run of a session, the participant can be rewarded with a 
 1. Display a white fixation cross on a black background for ~2s in the behavioral version or for ~5s in the scanner version. The cross is 48 pixels square.
 2. Display image stimulus for 4s.
 3. Add a cue of white text on black background centered above the image to the screen. The text is `How much would you pay to eat this food?`. Also display 4 squares evenly spaced in a row, from left to right, centered below the image, containing the text "1", "2", "3", "4" in black on a grey background. Above each box is a label "$0", "$.50", "$1", "$1.50" in white text indicating the value. Display for up to 2.5s, or until the participant responds.
-
-## Configuration
-Configuration occurs automatically on the first run of each session. The image ratings from the ImageSelection task are used to determine the conditions of healthy liked, healthy disliked, unhealthy liked, and unhealthy disliked foods, then conditions files, listing which images will be shown in order, are created.
 
 ## Developer documentation
 Created using Developed with PsychoPy v2020.1.2
