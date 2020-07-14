@@ -50,113 +50,56 @@ flowScheduler.add(quitPsychoJS, '', true);
 // quit if user presses Cancel in dialog box:
 dialogCancelScheduler.add(quitPsychoJS, '', false);
 
+// Determine the name of the conditions file based on the participant number and run number
+util.addInfoFromUrl(expInfo);
+var participant;
+var session;
+var run_number;
+var conditions_file;
+var conditions_file_path;
+
+participant = expInfo["participant"];
+session = expInfo["session"];
+run_number = expInfo["run_number"];
+
+conditions_file = (((("DEV" + participant) + "_") + run_number) + "_conditions.csv");
+conditions_file_path = './' + conditions_file;
+
 psychoJS.start({
   expName: expName,
   expInfo: expInfo,
   resources: [
   {name: 'task/BidKeys.bmp', path: './resources/task/BidKeys.bmp'},
-  {name: 'task/foodpics/healthy/cranberries.bmp', path: './resources/healthy/cranberries.bmp'},
-  {name: 'task/foodpics/healthy/Strawberries.bmp', path: './resources/healthy/Strawberries.bmp'},
-  {name: 'task/foodpics/healthy/Pear.bmp', path: './resources/healthy/Pear.bmp'},
-  {name: 'task/foodpics/healthy/SkinnyPop.bmp', path: './resources/healthy/SkinnyPop.bmp'},
-  {name: 'task/foodpics/healthy/KaleChips.bmp', path: './resources/healthy/KaleChips.bmp'},
-  {name: 'task/foodpics/healthy/FruitLeather.bmp', path: './resources/healthy/FruitLeather.bmp'},
-  {name: 'task/foodpics/healthy/Apricots.bmp', path: './resources/healthy/Apricots.bmp'},
-  {name: 'task/foodpics/healthy/Grapes.bmp', path: './resources/healthy/Grapes.bmp'},
-  {name: 'task/foodpics/healthy/Orange.bmp', path: './resources/healthy/Orange.bmp'},
-  {name: 'task/foodpics/healthy/HarvestSnaps.bmp', path: './resources/healthy/HarvestSnaps.bmp'},
-  {name: 'task/foodpics/healthy/AppleChips.bmp', path: './resources/healthy/AppleChips.bmp'},
-  {name: 'task/foodpics/healthy/PumpkingSeeds2.bmp', path: './resources/healthy/PumpkingSeeds2.bmp'},
-  {name: 'task/foodpics/healthy/Peanuts.bmp', path: './resources/healthy/Peanuts.bmp'},
-  {name: 'task/foodpics/healthy/StringCheese.bmp', path: './resources/healthy/StringCheese.bmp'},
-  {name: 'task/foodpics/healthy/Pecans.bmp', path: './resources/healthy/Pecans.bmp'},
-  {name: 'task/foodpics/healthy/OatmealBites.bmp', path: './resources/healthy/OatmealBites.bmp'},
-  {name: 'task/foodpics/healthy/RedApple.bmp', path: './resources/healthy/RedApple.bmp'},
-  {name: 'task/foodpics/healthy/Carrots.bmp', path: './resources/healthy/Carrots.bmp'},
-  {name: 'task/foodpics/healthy/RXBar.bmp', path: './resources/healthy/RXBar.bmp'},
-  {name: 'task/foodpics/healthy/MangoBananaPineapple.bmp', path: './resources/healthy/MangoBananaPineapple.bmp'},
-  {name: 'task/foodpics/healthy/Kiwi.bmp', path: './resources/healthy/Kiwi.bmp'},
-  {name: 'task/foodpics/healthy/BabybelCheese.bmp', path: './resources/healthy/BabybelCheese.bmp'},
-  {name: 'task/foodpics/healthy/GreenApple.bmp', path: './resources/healthy/GreenApple.bmp'},
-  {name: 'task/foodpics/healthy/Cashews.bmp', path: './resources/healthy/Cashews.bmp'},
-  {name: 'task/foodpics/healthy/Oatmeal.bmp', path: './resources/healthy/Oatmeal.bmp'},
-  {name: 'task/foodpics/healthy/CoconutChips.bmp', path: './resources/healthy/CoconutChips.bmp'},
-  {name: 'task/foodpics/healthy/FruitBar2.bmp', path: './resources/healthy/FruitBar2.bmp'},
-  {name: 'task/foodpics/healthy/Bananas.bmp', path: './resources/healthy/Bananas.bmp'},
-  {name: 'task/foodpics/healthy/FruitBar1.bmp', path: './resources/healthy/FruitBar1.bmp'},
-  {name: 'task/foodpics/healthy/DryRoastedPeanuts.bmp', path: './resources/healthy/DryRoastedPeanuts.bmp'},
-  {name: 'task/foodpics/healthy/StrawberryYogurt.bmp', path: './resources/healthy/StrawberryYogurt.bmp'},
-  {name: 'task/foodpics/healthy/ClifBar2.bmp', path: './resources/healthy/ClifBar2.bmp'},
-  {name: 'task/foodpics/healthy/VeggieStraws.bmp', path: './resources/healthy/VeggieStraws.bmp'},
-  {name: 'task/foodpics/healthy/HardBoiledEgg.bmp', path: './resources/healthy/HardBoiledEgg.bmp'},
-  {name: 'task/foodpics/healthy/Pistachios.bmp', path: './resources/healthy/Pistachios.bmp'},
-  {name: 'task/foodpics/healthy/ClifBar1.bmp', path: './resources/healthy/ClifBar1.bmp'},
-  {name: 'task/foodpics/healthy/Grapefruit.bmp', path: './resources/healthy/Grapefruit.bmp'},
-  {name: 'task/foodpics/healthy/Peach.bmp', path: './resources/healthy/Peach.bmp'},
-  {name: 'task/foodpics/healthy/PumpkinSeeds1.bmp', path: './resources/healthy/PumpkinSeeds1.bmp'},
-  {name: 'task/foodpics/healthy/FruitCup.bmp', path: './resources/healthy/FruitCup.bmp'},
-  {name: 'task/foodpics/healthy/Blueberries.bmp', path: './resources/healthy/Blueberries.bmp'},
-  {name: 'task/foodpics/healthy/Keenwah.bmp', path: './resources/healthy/Keenwah.bmp'},
-  {name: 'task/foodpics/healthy/SeedNutMix.bmp', path: './resources/healthy/SeedNutMix.bmp'},
-  {name: 'task/foodpics/healthy/Yogurt.bmp', path: './resources/healthy/Yogurt.bmp'},
-  {name: 'task/foodpics/healthy/PeasPlease.bmp', path: './resources/healthy/PeasPlease.bmp'},
-  {name: 'task/foodpics/healthy/Almonds.bmp', path: './resources/healthy/Almonds.bmp'},
-  {name: 'task/foodpics/healthy/Hummus.bmp', path: './resources/healthy/Hummus.bmp'},
-  {name: 'task/foodpics/healthy/CottageCheese.bmp', path: './resources/healthy/CottageCheese.bmp'},
-  {name: 'task/foodpics/healthy/SunflowerSeeds.bmp', path: './resources/healthy/SunflowerSeeds.bmp'},
-  {name: 'task/foodpics/healthy/Chickpeas.bmp', path: './resources/healthy/Chickpeas.bmp'},
-  {name: 'task/foodpics/unhealthy/SourPatch.bmp', path: './resources/unhealthy/SourPatch.bmp'},
-  {name: 'task/foodpics/unhealthy/BarbequeChips.bmp', path: './resources/unhealthy/BarbequeChips.bmp'},
-  {name: 'task/foodpics/unhealthy/ruffles_cheddar.bmp', path: './resources/unhealthy/ruffles_cheddar.bmp'},
-  {name: 'task/foodpics/unhealthy/3Musketeers.bmp', path: './resources/unhealthy/3Musketeers.bmp'},
-  {name: 'task/foodpics/unhealthy/beefjerky.bmp', path: './resources/unhealthy/beefjerky.bmp'},
-  {name: 'task/foodpics/unhealthy/PotatoChips.bmp', path: './resources/unhealthy/PotatoChips.bmp'},
-  {name: 'task/foodpics/unhealthy/Funyuns_small.bmp', path: './resources/unhealthy/Funyuns_small.bmp'},
-  {name: 'task/foodpics/unhealthy/SourCreamChips.bmp', path: './resources/unhealthy/SourCreamChips.bmp'},
-  {name: 'task/foodpics/unhealthy/Fritos.bmp', path: './resources/unhealthy/Fritos.bmp'},
-  {name: 'task/foodpics/unhealthy/RiceKrispiesTreat.bmp', path: './resources/unhealthy/RiceKrispiesTreat.bmp'},
-  {name: 'task/foodpics/unhealthy/Dots_one.bmp', path: './resources/unhealthy/Dots_one.bmp'},
-  {name: 'task/foodpics/unhealthy/Liquorice.bmp', path: './resources/unhealthy/Liquorice.bmp'},
-  {name: 'task/foodpics/unhealthy/cornnuts.bmp', path: './resources/unhealthy/cornnuts.bmp'},
-  {name: 'task/foodpics/unhealthy/crackerjacks.bmp', path: './resources/unhealthy/crackerjacks.bmp'},
-  {name: 'task/foodpics/unhealthy/macadamiacookie.bmp', path: './resources/unhealthy/macadamiacookie.bmp'},
-  {name: 'task/foodpics/unhealthy/choccookie.bmp', path: './resources/unhealthy/choccookie.bmp'},
-  {name: 'task/foodpics/unhealthy/gushers.bmp', path: './resources/unhealthy/gushers.bmp'},
-  {name: 'task/foodpics/unhealthy/chilifritos.bmp', path: './resources/unhealthy/chilifritos.bmp'},
-  {name: 'task/foodpics/unhealthy/SourPunch.bmp', path: './resources/unhealthy/SourPunch.bmp'},
-  {name: 'task/foodpics/unhealthy/creamsicle.bmp', path: './resources/unhealthy/creamsicle.bmp'},
-  {name: 'task/foodpics/unhealthy/candycorn.bmp', path: './resources/unhealthy/candycorn.bmp'},
-  {name: 'task/foodpics/unhealthy/JackLinks.bmp', path: './resources/unhealthy/JackLinks.bmp'},
-  {name: 'task/foodpics/unhealthy/FamousAmos.bmp', path: './resources/unhealthy/FamousAmos.bmp'},
-  {name: 'task/foodpics/unhealthy/oatmealcookie.bmp', path: './resources/unhealthy/oatmealcookie.bmp'},
-  {name: 'task/foodpics/unhealthy/CoolRanchDoritos.bmp', path: './resources/unhealthy/CoolRanchDoritos.bmp'},
-  {name: 'task/foodpics/unhealthy/Oreos.bmp', path: './resources/unhealthy/Oreos.bmp'},
-  {name: 'task/foodpics/unhealthy/Doritos.bmp', path: './resources/unhealthy/Doritos.bmp'},
-  {name: 'task/foodpics/unhealthy/laffytaffyred_one.bmp', path: './resources/unhealthy/laffytaffyred_one.bmp'},
-  {name: 'task/foodpics/unhealthy/Poptart1.bmp', path: './resources/unhealthy/Poptart1.bmp'},
-  {name: 'task/foodpics/unhealthy/popcorn_kettlecorn.bmp', path: './resources/unhealthy/popcorn_kettlecorn.bmp'},
-  {name: 'task/foodpics/unhealthy/100grand_small.bmp', path: './resources/unhealthy/100grand_small.bmp'},
-  {name: 'task/foodpics/unhealthy/OnionChips.bmp', path: './resources/unhealthy/OnionChips.bmp'},
-  {name: 'task/foodpics/unhealthy/MrGoodbar.bmp', path: './resources/unhealthy/MrGoodbar.bmp'},
-  {name: 'task/foodpics/unhealthy/lunchables_turkey.bmp', path: './resources/unhealthy/lunchables_turkey.bmp'},
-  {name: 'task/foodpics/unhealthy/MacNCheese.bmp', path: './resources/unhealthy/MacNCheese.bmp'},
-  {name: 'task/foodpics/unhealthy/M&Ms.bmp', path: './resources/unhealthy/M&Ms.bmp'},
-  {name: 'task/foodpics/unhealthy/SlimJim.bmp', path: './resources/unhealthy/SlimJim.bmp'},
-  {name: 'task/foodpics/unhealthy/PopTarts2.bmp', path: './resources/unhealthy/PopTarts2.bmp'},
-  {name: 'task/foodpics/unhealthy/peachrings.bmp', path: './resources/unhealthy/peachrings.bmp'},
-  {name: 'task/foodpics/unhealthy/hariboraspberries.bmp', path: './resources/unhealthy/hariboraspberries.bmp'},
-  {name: 'task/foodpics/unhealthy/peanutbuttercookie.bmp', path: './resources/unhealthy/peanutbuttercookie.bmp'},
-  {name: 'task/foodpics/unhealthy/rugercookie.bmp', path: './resources/unhealthy/rugercookie.bmp'},
-  {name: 'task/foodpics/unhealthy/HotTamales.bmp', path: './resources/unhealthy/HotTamales.bmp'},
-  {name: 'task/foodpics/unhealthy/JellyBeans.bmp', path: './resources/unhealthy/JellyBeans.bmp'},
-  {name: 'task/foodpics/unhealthy/SwedishFish.bmp', path: './resources/unhealthy/SwedishFish.bmp'},
-  {name: 'task/foodpics/unhealthy/Cheetos.bmp', path: './resources/unhealthy/Cheetos.bmp'},
-  {name: 'task/foodpics/unhealthy/KettleChips.bmp', path: './resources/unhealthy/KettleChips.bmp'},
-  {name: 'task/foodpics/unhealthy/Skittles.bmp', path: './resources/unhealthy/Skittles.bmp'},
-  {name: 'task/foodpics/unhealthy/PeanutButterCup.bmp', path: './resources/unhealthy/PeanutButterCup.bmp'},
-  {name: 'task/foodpics/unhealthy/KitKat.bmp', path: './resources/unhealthy/KitKat.bmp'}]
+  {name: conditions_file, path: conditions_file_path}]
 });
 
+// Based on the contents of the conditions file, download only the image resources needed.
+function condition_file_download() {
+  const resourceValue = psychoJS.serverManager.getResource(conditions_file);
+  const workbook = XLSX.read(new Uint8Array(resourceValue), { type: "array" });
+
+  // we consider only the first worksheet:
+  if (workbook.SheetNames.length === 0)
+  throw 'workbook should contain at least one worksheet';
+
+  const sheetName = workbook.SheetNames[0];
+  const worksheet = workbook.Sheets[sheetName];
+
+  // worksheet to array of arrays (the first array contains the fields):
+  const sheet = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false });
+
+  const fields = sheet.shift();
+
+  // (*) select conditions:
+  const selectedRows = sheet;
+
+  let image_files = []
+  for (const element of selectedRows) {
+    image_files.push({name: (element[0]), path: (element[0].replace('task/foodpics', './resources'))});
+  }
+
+  psychoJS.downloadResources(image_files);
+}
 
 var frameDur;
 function updateInfo() {
@@ -181,11 +124,7 @@ function updateInfo() {
 
 var setupClock;
 var instructionsClock;
-var participant;
-var session;
-var run_number;
 var start_text_str;
-var conditions_file;
 var start_text;
 var start_trigger;
 var trialClock;
@@ -208,20 +147,13 @@ function experimentInit() {
     return ((session === "1") || (session === "2"));
   }
   
-  participant = expInfo["participant"];
-  session = expInfo["session"];
-  run_number = expInfo["run_number"];
-  
   if (is_mri_session(session)) {
       start_text_str = "Calibrating scanner.\nPlease hold very still.";
   } else {
       start_text_str = "The task is about to begin.\nGet ready!";
   }
-  conditions_file = (((("DEV" + participant) + "_") + run_number) + "_conditions.csv");
-  
-  psychoJS.downloadResources([
-    {name: conditions_file, path: './' + conditions_file}
-  ]);
+
+  condition_file_download();
   
   start_text = new visual.TextStim({
     win: psychoJS.window,
