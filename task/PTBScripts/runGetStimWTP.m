@@ -50,8 +50,8 @@ condtrials = (nruns*ntrials) / (ncond1*ncond2); % number of liked and disliked h
 
 %% Load image info
 % Define input and output dropbox path
-dxpath = '~/Dropbox (PfeiBer Lab)/Devaluation/Tasks/ImageSelection/output/WTP'; % check this
-dxpathout = '~/Dropbox (PfeiBer Lab)/Devaluation/Tasks/WTP/output';
+dxpath = '~/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/Tasks/ImageSelection/output/WTP'; % check this
+dxpathout = '~/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/Tasks/WTP/output';
 
 % Define subject input file
 subinput = sprintf('%s/%s%s_ratings.csv',dxpath,study,subjid);

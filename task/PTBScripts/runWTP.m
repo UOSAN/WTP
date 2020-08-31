@@ -20,7 +20,7 @@ addpath(fullfile(homepath,'PTBScripts'));
 homepath=PTBParams.homepath;
 
 %% Set dropbox path for copying
-dropboxDir = '~/Dropbox (PfeiBer Lab)/Devaluation/Tasks/WTP/output';
+dropboxDir = '~/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/Tasks/WTP/output';
 
 %% Load trial and subject condition info
 % Load trial condition order info (design created using the CAN lab GA)
