@@ -11,6 +11,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Initial setup for PsychToolbox, using InitPTB.m
+clear PsychHID;
 clear all;
 
 pathtofile = mfilename('fullpath');
